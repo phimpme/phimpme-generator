@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Phimpme Generator</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="">{% csrf_token  %}
+  <p>
+    App name:
+    <input name="app_name" type="text"/>
+  </p>
+  <p>App logo: Not supported yet</p>
+  <p>Functions:</p>
+  <p>
+    <input type="checkbox" name="enable_map" id="enable_map" />
+    <label for="enable_map">Enable map</label>
+  </p>
+  <p>
+    <input type="checkbox" name="enable_photo_capturing" id="enable_photo_capturing" />
+    <label for="enable_photo_capturing">Enable photo capturing</label>
+  </p>
+  <p>
+    <input type="checkbox" name="enable_choose_from_library" id="enable_choose_from_library" />
+    <label for="enable_choose_from_library">Enable choose from library</label>
+  </p>
+  <p>
+    <input type="checkbox" name="enable_photo_manipulation" id="enable_photo_manipulation" />
+     <label for="enable_photo_manipulation">Enable photo manipulation</label>
+  </p>
+  <p>
+    <input type="checkbox" name="enable_photo_location_modification" id="enable_photo_location_modification" />
+    <label for="enable_photo_location_modification">Enable photo location modification</label>
+  </p>
+  <p>
+    <input type="checkbox" name="enable_nfc" id="enable_nfc" />
+    <label for="enable_nfc">Enable NFC</label>
+  </p>
+  <p>
+    <input type="submit" name="submit" id="submit" value="Submit" />
+  </p>
+</form>
+</body>
+</html>
