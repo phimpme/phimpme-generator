@@ -18,4 +18,5 @@ def app_config(request):
         else:
             raise Http404#HttpResponseServerError
     else:
+        generator.set_logo(None, None)
         return render(request, 'app_config.html')
