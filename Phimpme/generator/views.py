@@ -12,11 +12,12 @@ def app_config(request):
                 configs[k] = v
         
         # run script
-        ret = -1
+        from generator.gen_script import generate
+        ret, path = generate(app_name = app_name, app_logo = None, configs = configs)
+        print path
         if ret == 0:
             return render(request, 'app_config.html', {'generated': True, 'download_link':'URL...'})
         else:
             raise Http404#HttpResponseServerError
     else:
-        generator.set_logo(None, None)
         return render(request, 'app_config.html')

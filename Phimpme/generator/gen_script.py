@@ -40,8 +40,9 @@ def compile(path):
     gradlew = path + "/gradlew"
     # os.chmod(gradlew, stat.S_IEXEC)
     os.system("chmod 777 " + gradlew)  # TODO: Why os.chmod and chmod +x don't work?
-    os.system("cd " + path + " && " + gradlew + " assembleDebug")  # TODO: Change to release
+    ret = os.system("cd " + path + " && " + gradlew + " assembleDebug")  # TODO: Change to release
     os.system("cp " + path + "/Phimpme/build/apk/*.apk ./")
+    return ret, path + "/Phimpme/build/apk/Phimpme-debug-unaligned.apk"
 
 def copy_project(src_path):
     dest_path = "/tmp/Phimpme"
@@ -50,15 +51,13 @@ def copy_project(src_path):
     assert(r == 0)
     return dest_path
 
-def generate(template_path, app_name, app_logo, configs):
+def generate(app_name, app_logo, configs):
+    template_path = "/Users/yzq/Documents/GitHub/The-Generator/Android/Phimpme"
     path = copy_project(template_path)
     set_name(path, app_name)
     set_logo(path, app_logo)
     set_config(path, configs)
-    compile(path)
+    return compile(path)
 
 if __name__ == "__main__":
-    generate(template_path="/Users/yzq/Documents/GitHub/The-Generator/Android/Phimpme",
-        app_name="YZQ-Phimpme",
-        app_logo=None,
-        configs={'ENABLE_MAP': False, 'ENABLE_PHOTO_MANIPULATION': False})
+    generate(app_name="YZQ-Phimpme", app_logo=None, configs={'ENABLE_MAP': False, 'ENABLE_PHOTO_MANIPULATION': False})
