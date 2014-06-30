@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, include, url
-from django.contrib import admin
-from generator import views
 
+from django.contrib import admin
+import Phimpme
+from Phimpme.apps.usermgt import urls
+from Phimpme.apps.orders import urls
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -10,5 +12,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', views.app_config, name='App Config')
+	url(r'^cgi-bin/usermgt/', include(Phimpme.apps.usermgt.urls)),
+    url(r'^cgi-bin/orders/', include(Phimpme.apps.orders.urls)),
+
 )

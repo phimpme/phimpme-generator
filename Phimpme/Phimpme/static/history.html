@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> New Document </title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript">
+	function renovateList(id){
+		$.ajax({
+			url : "/cgi-bin/usersite/statusList/",
+			type : "GET",
+			data:{
+				id:id
+			},
+			success : function(data) {
+				var json = eval("(" + data + ")");
+
+				if (json.result == "success") {
+					createList(json.data);
+					return;
+				}else{
+					location.href="/error.html";
+					return;
+				}
+			}
+		});
+	}
+	function createList(transData){
+		for(var i = 0,iLen=transData.length;i <iLen; i++){
+			var tmpDiv="<table><tr><td width='10%'>序列</td><td>内容</td></tr>";
+			var tempArray=(transData[i].content).split(",");
+			for(var j = 0,jLen=tempArray.length;j <jLen; j++){
+				tmpDiv+="<tr>";
+				tmpDiv+="<td dfsdf width='10%'>"+(j+1)+"</td>";
+				tmpDiv+="<td>"+tempArray[j]+"</td>";
+				tmpDiv+="<tr>";
+			}
+			if(transData[i].statas==0){
+				tmpDiv+="<tr>";
+				tmpDiv+="<td colspan='2'><input type='button' value="+transData[i].statas+" onclick='renovateList("+transData[i].id+");'/></td>";
+				tmpDiv+="<tr>";
+			}
+			tmpDiv+="<table>";
+			$("#renovateTable").append(tmpDiv);
+		}
+	}
+	$(document).ready(function(){
+		renovateList("");
+		createList([{"id":1,"statas":0,"content":"1,2,3,4,4"},{"id":2,"statas":3,"content":"1,2,3,4,4"}]);
+	})
+  </script>
+  <STYLE type="text/css">
+
+	<!-- BODY {
+		BACKGROUND: #fff; MARGIN: 80px auto; FONT: 14px/150% Verdana, Georgia, Sans-Serif; COLOR: #000; TEXT-ALIGN: center
+	}
+	TABLE{MARGIN:10px AUTO;BORDER:0;border-collapse: collapse;width: 100%;}
+	TD{HEIGHT:30PX;BORDER: #84b0c7 1px solid;}
+	DIV {
+		MARGIN: 0px auto;WIDTH: 500px;
+	}
+	H1 {
+		BORDER: #84b0c7 1px solid;PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-SIZE: 20px; BACKGROUND: #eee; PADDING-BOTTOM: 4px; MARGIN: 0px; PADDING-TOP: 4px; BORDER-BOTTOM: #84b0c7 1px solid
+	}
+	input[type="text"],input[type="password"]{width:200px}
+	-->
+	</STYLE>
+ </head>
+
+ <body>
+	 <DIV>
+		<H1>列表</H1>
+		<div id="renovateTable"></div>
+	</DIV>
+ </body>
+</html>

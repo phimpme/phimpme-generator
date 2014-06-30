@@ -3,13 +3,42 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Phimpme Generator</title>
+<script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/static/js/app.js"></script>
+<STYLE type="text/css">
+<!-- 
+BODY {
+	BACKGROUND: #fff; MARGIN: 80px auto; FONT: 14px/150% Verdana, Georgia, Sans-Serif; COLOR: #000; TEXT-ALIGN: center
+}
+A:link {
+	COLOR: #2c4c78; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #2c4c78; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #2c4c78; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #2c4c78; TEXT-DECORATION: none
+}
+H1 {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-SIZE: 20px; BACKGROUND: #eee; PADDING-BOTTOM: 4px; MARGIN: 0px; PADDING-TOP: 4px; BORDER-BOTTOM: #84b0c7 1px solid
+}
+DIV {
+	BORDER-RIGHT: #84b0c7 1px solid; BORDER-TOP: #84b0c7 1px solid; BACKGROUND: #e5eef5; MARGIN: 0px auto; BORDER-LEFT: #84b0c7 1px solid; WIDTH: 500px; BORDER-BOTTOM: #84b0c7 1px solid
+}
+h3 {
+	padding: 55px 0;MARGIN: 0px;
+} -->
+</STYLE>
 </head>
 
 <body>
-<form id="form1" name="form1" method="post" action="">{% csrf_token  %}
+
   <p>
     App name:
-    <input name="app_name" type="text"/>
+    <input id="app_name" name="app_name" type="text"/>
   </p>
   <p>App logo: Not supported yet</p>
   <p>Functions:</p>
@@ -39,8 +68,8 @@
   </p>
   <p>In this experimental version, IT TAKES ABOUT 37 SECONDS TO GENERATE, and there would be NO RESPONSE during the period of time. If generated sucessfully,  downloading will start automatically.</p>
   <p>
-    <input type="submit" name="submit" id="submit" value="Submit" />
+    <input type="submit" name="submit" id="submit" value="Submit" onclick="sendorder();"/>
   </p>
-</form>
+
 </body>
 </html>
