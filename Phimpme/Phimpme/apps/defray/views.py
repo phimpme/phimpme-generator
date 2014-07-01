@@ -6,11 +6,12 @@ from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
 from django.http.response import HttpResponse
 from django import forms
-
+from Phimpme.apps.usermgt.models import my_login_required
 from Phimpme.apps.orders.models import order
+
 # Create your views here.
 
-
+@my_login_required
 def defray_pay(request):
     """
     just tell the order-system that we have forked out enough money

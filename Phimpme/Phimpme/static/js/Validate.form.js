@@ -13,8 +13,8 @@ function registsubmit(){
 	var flag = validateFunction.FORM_validate();
     if (flag) {
       $.ajax({
-			url : "/cgi-bin/register/",
-			type : "GET",
+			url : "/cgi-bin/usermgt/register/",
+			type : "POST",
 			data:{
 				"username":$("#username").val(),
 				"userpwd":$("#pwd").val(),

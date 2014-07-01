@@ -19,11 +19,11 @@ function sendLogin(){
 		success : function(data) {
 			var json = eval("(" + data + ")");
 
-			if (json.result == "error") {
-				location.href="/static/error.html";
+			if (json.result == "success") {
+				location.href="/static/app_config.html"; 
 				return;
 			}else{
-				location.href="/static/app_config.html";
+				location.href="/static/error.html";
 				return;
 			}
 		}

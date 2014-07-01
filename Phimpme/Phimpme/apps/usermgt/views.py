@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # coding:utf-8
+
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render_to_response, render
 from django.http.response import HttpResponseRedirect
 from django.http.response import HttpResponse
@@ -10,49 +12,86 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
+def _login_callback(request, str_):
+    if request.method == 'GET':
+        return 'loginCallBack(%s)' % str_
+    else:
+        return str_
 
-def usermgt_index(request):
-    """
-    """
-    return render_to_response('login.html', {})
 
 def usermgt_login(request):
-    """
-    """
     try:
-        username = request.GET['username']
-        m = User.objects.get(username=username)
-        if m.password == request.GET['userpwd']:
-            request.session['member_id'] = m.id
-            return HttpResponseRedirect('{"result":"success","msgstr":"/you-are-logged-in/"}')
-    except User.DoesNotExist:
-        return HttpResponse('{"result":"error","msgstr":"Your username and password do not match."}')
+        if request.method == 'GET':
+            username = request.GET.get('username', '').strip('"\' ')
+            userpwd = request.GET.get('userpwd', '').strip('"\' ')
+        else:
+            username = request.POST.get('username', '').strip('"\' ')
+            userpwd = request.POST.get('userpwd', '').strip('"\' ')
+        if username is None or username == '':
+            return HttpResponse(_login_callback(request, '{"result":"error","errormsg":"userid or password is null"}'))
+
+        user = authenticate(username=username, password=userpwd)
+
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+            else:
+                raise Exception('username:[%s] login fail,no active' % (username))
+        else:
+             raise Exception('username:[%s] login fail,no find user' % (username))
+        if user is not None and user.is_active:
+            ret = _login_callback(request, '{"result":"success"}')
+            return HttpResponse(ret)
+        else:
+            return HttpResponse(_login_callback(request, '{"result":"error","errmsg":"password error"}'))
+    except Exception, e:
+        return HttpResponse(_login_callback(request, '{"result":"error","errmsg":"password error%s"}' % e))
+
+
+def user_logout(request):
+    try:
+        user = request.user
+        logout(request)
+        return HttpResponse('{"result":"success"}')
+    except Exception, e:
+        EXCEPTION(e)
+        return HttpResponse('{"result":"success"}')
+
+
 
 def usermgt_register(request):
     """
     """
     try:
-        username = request.GET['username']
-        userpwd = request.GET['userpwd']
-        email = request.GET['email']
-        if username is not None and userpwd is not None and email is not None:
-            user = User.objects.filter(username=username)
-            if user is None or len(user) == 0:
-                user = User(username=username, password=userpwd, email=email)
+        if request.method == 'POST':
+            username = request.POST['username']
+            userpwd = request.POST['userpwd']
+            email = request.POST['email']
+            if username is not None and userpwd is not None and email is not None:
+                user = User.objects.filter(username=username)
+                if user is None or len(user) == 0:
+                    user = User(username=username, email=email)
+                    user.set_password(userpwd)
+                else:
+                    raise Exception('user have registed')
+                user.save()
+                return HttpResponse('{"result":"success","msgstr":"registerd OK"}')
             else:
-                raise Exception('user have registed')
-            user.save()
-            return HttpResponseRedirect('{"result":"success","msgstr":"registerd OK"}')
+                raise Exception('less info required ')
         else:
-            raise Exception('less info required ')
+             raise Exception('method is not POST')
     except Exception, e:
         return HttpResponse('{"result":"error","msgstr":"%s"}' % e)
 
-def prompt_success(request):
-    """
-    """
 
-def prompt_failed(request):
+
+def usermgt_logout(request):
     """
     """
+    try:
+        user = request.user
+        logout(request)
+        return render_to_response('success.html', {})
+    except Exception, e:
+        return render_to_response('success.html', {})
 

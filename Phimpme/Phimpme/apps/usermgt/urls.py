@@ -12,8 +12,7 @@ from Phimpme.apps.usermgt.views import *
 urlpatterns = patterns('',
     url(r'^login/', usermgt_login),
     url(r'^register/', usermgt_register),
-    url(r'^success/', prompt_success),
-    url(r'^faild/', prompt_failed),
+    url(r'logout/', usermgt_logout),
     # url('^index/', usermgt_index),
 )
 

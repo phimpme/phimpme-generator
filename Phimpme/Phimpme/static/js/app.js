@@ -16,8 +16,8 @@ function sendorder(){
 	}
 
 	$.ajax({
-		url : "/cgi-bin/orders/order",
-		type : "GET",
+		url : "/cgi-bin/orders/order/",
+		type : "POST",
 		data:{
 			"app_name":app_name,
 			"enable_choose_from_library":enable_choose_from_library,
@@ -30,13 +30,18 @@ function sendorder(){
 		success : function(data) {
 			var json = eval("(" + data + ")");
 
+			
 			if (json.result == "error") {
-				location.href="/static/login.html";
+				location.href="/static/error.html";
 				return;
-			}else{
-				location.href="/static/app_config.html";
+			}else if (json.result == "noauth") {
+				location.href="/static/error.html";
+				return;
+			} else {
+				location.href="/static/history.html";
 				return;
 			}
 		}
 	});
+
 }

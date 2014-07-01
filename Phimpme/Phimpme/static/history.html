@@ -2,13 +2,33 @@
 <html>
  <head>
   <title> New Document </title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="content-type" content="text/html,no-cache; charset=utf-8">
   <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
   <script type="text/javascript">
-	function renovateList(id){
+	function renovateList(){
 		$.ajax({
-			url : "/cgi-bin/usersite/statusList/",
-			type : "GET",
+			url : "/cgi-bin/orders/review/",
+			type : "POST",
+			success : function(data) {
+				var json = eval("(" + data + ")");
+
+				if (json.result == "success") {
+					createList(json.data);
+					return;
+				}if (json.result == "noauth") {
+					location.href="/static/login.html";
+					return;
+				}else{
+					location.href="/static/error.html";
+					return;
+				}
+			}
+		});
+	}
+	function renovateOneList(id){
+		$.ajax({
+			url : "/cgi-bin/defray/pay/",
+			type : "POST",
 			data:{
 				id:id
 			},
@@ -18,35 +38,38 @@
 				if (json.result == "success") {
 					createList(json.data);
 					return;
+				}if (json.result == "noauth") {
+					location.href="/static/login.html";
+					return;
 				}else{
-					location.href="/error.html";
+					location.href="/static/error.html";
 					return;
 				}
 			}
 		});
 	}
 	function createList(transData){
+		$("#renovateTable *").remove();
 		for(var i = 0,iLen=transData.length;i <iLen; i++){
-			var tmpDiv="<table><tr><td width='10%'>序列</td><td>内容</td></tr>";
+			var tmpDiv="<table><tr><td width='10%'>订单号</td><td width='25%'>应用名称</td><td width='10%'>价格</td><td width='10%'>订单状态</td><td width='15%'>操作</td></tr>";
 			var tempArray=(transData[i].content).split(",");
+			tmpDiv+="<tr>";
 			for(var j = 0,jLen=tempArray.length;j <jLen; j++){
-				tmpDiv+="<tr>";
-				tmpDiv+="<td dfsdf width='10%'>"+(j+1)+"</td>";
 				tmpDiv+="<td>"+tempArray[j]+"</td>";
-				tmpDiv+="<tr>";
 			}
-			if(transData[i].statas==0){
-				tmpDiv+="<tr>";
-				tmpDiv+="<td colspan='2'><input type='button' value="+transData[i].statas+" onclick='renovateList("+transData[i].id+");'/></td>";
-				tmpDiv+="<tr>";
+
+			if(transData[i].status==0){
+				tmpDiv+="<td colspan='2'><input type='button' value='Pay' onclick='renovateOneList("+transData[i].id+");'/></td>";
+			} else {
+				tmpDiv+="<td colspan='2'><a href=\"jsp/do_download.jsp\">Download</a></td>";
 			}
+			tmpDiv+="<tr>";
 			tmpDiv+="<table>";
 			$("#renovateTable").append(tmpDiv);
 		}
 	}
 	$(document).ready(function(){
-		renovateList("");
-		createList([{"id":1,"statas":0,"content":"1,2,3,4,4"},{"id":2,"statas":3,"content":"1,2,3,4,4"}]);
+		renovateList();
 	})
   </script>
   <STYLE type="text/css">
@@ -68,6 +91,9 @@
  </head>
 
  <body>
+ <div>
+<a style="display: block;float: left;" href='/cgi-bin/usermgt/logout/' >退出登录</a><a style="display: block;float: right;" href='/static/app_config.html' >定制软件</a>
+</div>
 	 <DIV>
 		<H1>列表</H1>
 		<div id="renovateTable"></div>
