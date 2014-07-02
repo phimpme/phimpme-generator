@@ -9,12 +9,13 @@ from django import forms
 from django.contrib.auth.models import User
 from Phimpme.apps.orders.models import order
 from Phimpme.apps.usermgt.models import my_login_required
+from Phimpme.apps.appshop.models import appshop_generate
 # Create your views here.
 
 @my_login_required
 def orders_review(request):
     """
-    {"result":"success","data":[{"id":1,"status":0,"content":"1,2,3,4,4"},{"id":2,"statas":3,"content":"1,2,3,4,4"}]}
+    {"result":"success","data":[{"id":"x","status":"x","refer":"","content":"1,2,3,4,4"},]}
     """
     try:
         i = 0
@@ -22,15 +23,15 @@ def orders_review(request):
         orders = order.objects.filter(order_related_user=user)
         rvar = '{"result":"success","data":[ '
         for o in orders:
-            name = user.username + " s App " + o.order_appname
+            name = user.username + " s'APP " + o.order_appname
             if o.order_status == 0:
                 status = 'waiting payment'
             elif o.order_status == 1:
                 status = 'processing'
             else:
                 status = 'complete'
-            rvar += '{"id":"' + str(i) + '","status":"' + str(o.order_status) + '","refer":"' + str(o.order_output_file.name) + '","content":"' \
-            + str(o.id) + ',' + name + ', 0,' + status + '"},'
+            rvar += '{"id":"' + str(o.id) + '","status":"' + str(o.order_status) + '","refer":"' + str(o.order_output_file) + '","content":"' \
+            + str(o.id) + ',' + name + ',' + str(o.order_values) + ',' + status + '"},'
             i = i + 1
         rvar = rvar[0:-1]
         rvar += ']}'
@@ -68,15 +69,16 @@ def orders_ordering(request):
             if (request.POST['enable_photo_manipulation'] == 'on'):
                 order_fetures += 'ENABLE_CHOOSE_FROM_LIBRARY,'
 
-            order_fetures = order_fetures[0:-1]
-            # TODO: FIXME:generate
+            # TODO : FIXME : generate real values
+            order_values = 0
 
+            order_fetures = order_fetures[0:-1]
             oa = order(\
                         order_related_user=user, order_status=0, \
                         order_appname=app_name, \
-                        order_fetures=order_fetures)
+                        order_fetures=order_fetures, order_values=order_values)
             oa.save()
-            return HttpResponse('{"result":"success","msgstr":"processing"}')
+            return HttpResponse('{"result":"success","msgstr":"waiting payment"}')
         else:
             raise Exception('method is not POST ')
     except Exception, e:

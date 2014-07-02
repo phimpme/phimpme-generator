@@ -15,6 +15,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 	url(r'^cgi-bin/usermgt/', include(Phimpme.apps.usermgt.urls)),
     url(r'^cgi-bin/orders/', include(Phimpme.apps.orders.urls)),
-    url(r'^defray/', include(Phimpme.apps.defray.urls)),
+    url(r'^cgi-bin/defray/', include(Phimpme.apps.defray.urls)),
 
 )

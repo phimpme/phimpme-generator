@@ -20,6 +20,9 @@ def _login_callback(request, str_):
 
 
 def usermgt_login(request):
+    """
+    extend Django's login, just for js process, use json instead of http302
+    """
     try:
         if request.method == 'GET':
             username = request.GET.get('username', '').strip('"\' ')
@@ -48,19 +51,10 @@ def usermgt_login(request):
         return HttpResponse(_login_callback(request, '{"result":"error","errmsg":"password error%s"}' % e))
 
 
-def user_logout(request):
-    try:
-        user = request.user
-        logout(request)
-        return HttpResponse('{"result":"success"}')
-    except Exception, e:
-        EXCEPTION(e)
-        return HttpResponse('{"result":"success"}')
-
-
 
 def usermgt_register(request):
     """
+    now only need three element : username/userpwd/email
     """
     try:
         if request.method == 'POST':
@@ -87,6 +81,7 @@ def usermgt_register(request):
 
 def usermgt_logout(request):
     """
+    logout is always successs
     """
     try:
         user = request.user

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
-  <title> New Document </title>
+  <title> History </title>
   <meta http-equiv="content-type" content="text/html,no-cache; charset=utf-8">
   <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
   <script type="text/javascript">
@@ -36,7 +36,7 @@
 				var json = eval("(" + data + ")");
 
 				if (json.result == "success") {
-					createList(json.data);
+					renovateList();
 					return;
 				}if (json.result == "noauth") {
 					location.href="/static/login.html";
@@ -60,8 +60,10 @@
 
 			if(transData[i].status==0){
 				tmpDiv+="<td colspan='2'><input type='button' value='Pay' onclick='renovateOneList("+transData[i].id+");'/></td>";
+			} else if (transData[i].status==1) {
+				tmpDiv+="<td colspan='2'><a >please wait...</a></td>";
 			} else {
-				tmpDiv+="<td colspan='2'><a href=\"jsp/do_download.jsp\">Download</a></td>";
+				tmpDiv+="<td colspan='2'><a href=\""+transData[i].refer+"\">Download</a></td>";
 			}
 			tmpDiv+="<tr>";
 			tmpDiv+="<table>";

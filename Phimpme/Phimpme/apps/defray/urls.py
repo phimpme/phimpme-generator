@@ -12,6 +12,6 @@ urlpatterns = patterns('',
     # url(r'^$', 'Phimpme.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'pay/', defray_pay()),
+    url(r'pay/', defray_pay),
 
 )

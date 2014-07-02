@@ -24,7 +24,7 @@ function registsubmit(){
 				var json = eval("(" + data + ")");
 
 				if (json.result == "success") {
-					location.href="/static/app_config.html";
+					location.href="/static/login.html";
 					return;
 				}else{
 					location.href="/static/error.html";
