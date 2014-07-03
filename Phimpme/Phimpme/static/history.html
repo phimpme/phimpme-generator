@@ -51,7 +51,7 @@
 	function createList(transData){
 		$("#renovateTable *").remove();
 		for(var i = 0,iLen=transData.length;i <iLen; i++){
-			var tmpDiv="<table><tr><td width='10%'>订单号</td><td width='25%'>应用名称</td><td width='10%'>价格</td><td width='10%'>订单状态</td><td width='15%'>操作</td></tr>";
+			var tmpDiv="<table><tr><td width='10%'>Order No.</td><td width='25%'>App name</td><td width='10%'>Price</td><td width='10%'>Status</td><td width='15%'>Option</td></tr>";
 			var tempArray=(transData[i].content).split(",");
 			tmpDiv+="<tr>";
 			for(var j = 0,jLen=tempArray.length;j <jLen; j++){
@@ -94,10 +94,10 @@
 
  <body>
  <div>
-<a style="display: block;float: left;" href='/cgi-bin/usermgt/logout/' >退出登录</a><a style="display: block;float: right;" href='/static/app_config.html' >定制软件</a>
+<a style="display: block;float: left;" href='/cgi-bin/usermgt/logout/' >Logout</a><a style="display: block;float: right;" href='/static/app_config.html' >Generate new app</a>
 </div>
 	 <DIV>
-		<H1>列表</H1>
+		<H1>Order history</H1>
 		<div id="renovateTable"></div>
 	</DIV>
  </body>
