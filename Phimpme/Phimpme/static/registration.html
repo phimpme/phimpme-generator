@@ -6,51 +6,15 @@
   <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
-<style type="text/css">
-*{margin:0;padding:0;list-style-type:none;}
-a,img{border:0;}
-.form label, .form input, .form select, .form textarea, .form button, .form .label{float:left;font-size:12px;}
-.fl{float:left;}.fr{float:right;}.fn{float:none;}
-.hide{display:none;}.invisible{visibility:hidden;}.overflow{overflow:hidden;}
-.clear{display:block;clear:both;height:0;overflow:hidden;}
-body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
-#registsubmit.disabled{background-position:0 -36px;cursor:default!important;}
-.red{color:#ff0000;font-family:"宋体";font-weight:normal;}
-/* formbox */
-#formbox{padding:20px;margin:20px auto;width:880px;}
-#formbox h3{font-size:16px;height:32px;color:#3366cc;font-weight:800;border-bottom:solid 1px #D1D1D1;margin:0 0 20px 0;padding:0 10px;}
-#formbox .item{padding-top:5px;height:50px;overflow:hidden;line-height:26px;}
-#formbox .item a:link,#formbox .item a:visited{text-decoration:underline;}
-#formbox .label{width:300px;text-align:right;font-size:14px;}
-#formbox .span-150{width:150px;}
-#formbox .text{width:240px;height:16px;padding:4px 3px;border:1px solid #bbb;font-size:14px;font-family:arial,"宋体";}
-#formbox .text-1{width:100px;}
-#formbox .blank{width:16px;height:16px;margin:2px 5px 0;}
-#formbox .img img{height:26px;margin:0 5px;}
-#formbox .succeed{background:url(images/pwdstrength.gif) no-repeat -105px 0;}
-#formbox .highlight1{border:1px solid #EFA100;outline:2px solid #FFDC97;*border:2px solid #ffcc66;*padding:3px 2px;}
-#formbox .highlight2{border:1px solid #f00;outline:1px solid #FFC1C1;color:#f00;}
-#formbox .pwdbg{background:#FFF8EB;}
-#formbox .focus{color:#999;line-height:22px;*line-height:20px;}
-#formbox .null,#formbox .error{color:red;line-height:22px;*line-height:20px;}
-#formbox .checkbox{margin-top:6px;*margin-top:2px;}
-#formbox #referrer{color:#999;font-size:12px;}
-#formbox #protocol{margin:0px 5px 0 0;display:inline;}
-#pwdstrength{color:#999;line-height:22px;padding-right:10px;}
-#pwdstrength b{float:left;width:104px;height:13px;overflow:hidden;margin-top:5px;*margin-top:3px;}
-.strengthA b{background:url(images/pwdstrength.gif) no-repeat 0 0;}
-.strengthB b{background:url(images/pwdstrength.gif) no-repeat 0 -13px;}
-.strengthC b{background:url(images/pwdstrength.gif) no-repeat 0 -26px;}
-</style>
 
 <div id="formbox">
 	<form id="formpersonal" method="post" onsubmit="return false;">
 	<div class="form">
 		<div>
-		<a href='/static/login.html' >Back to login</a>
+		<a href='/static/login.html' >Back</a>
 		</div>
 		<div class="item">
-			<span class="label"><span class="red">*</span>Username：</span>
+			<span class="label"><span class="red">*</span>Username:</span>
 			<div class="fl">
 				<input sta="0" id="username" name="username" class="text" tabindex="1" type="text">
 				<label id="username_succeed" class="blank"></label>
@@ -61,18 +25,18 @@ body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
 		
 		<div id="o-password">
 			<div class="item">
-				<span class="label"><span class="red">*</span>Set password：</span>
+				<span class="label"><span class="red">*</span>Set password:</span>
 				<div class="fl">
 					<input id="pwd" name="pwd" class="text" tabindex="2" type="password">
 					<label id="pwd_succeed" class="blank"></label>
 					<span class="clear"></span>
-					<label class="hide" id="pwdstrength"><span class="fl">Safety：</span><b></b></label>
+					<label class="hide" id="pwdstrength"><span class="fl">Security:</span><b></b></label>
 					<label id="pwd_error"></label>
 				</div>
 			</div><!--item end-->
 			
 			<div class="item">
-				<span class="label"><span class="red">*</span>Verify password：</span>
+				<span class="label"><span class="red">*</span>Verify password:</span>
 				<div class="fl">
 					<input id="pwd2" name="pwd2" class="text" tabindex="3" type="password">
 					<label id="pwd2_succeed" class="blank"></label>
@@ -84,7 +48,7 @@ body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
 		</div><!--o-password end-->
 		
 		<div class="item">
-			<span class="label"><span class="red">*</span>E-mail：</span>
+			<span class="label"><span class="red">*</span>E-mail:</span>
 			<div class="fl">
 				<input id="mail" name="mail" class="text" tabindex="4" type="text">
 				<label id="mail_succeed" class="blank"></label>

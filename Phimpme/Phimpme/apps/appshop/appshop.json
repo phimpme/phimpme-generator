@@ -1,0 +1,24 @@
+[
+	{
+		"model": "Phimpme.apps.appshop.appshop_paramters", 
+		"pk": 1, "fields": {
+			"key": "first_build_price", 
+			"value":"100"
+		}
+	},
+
+	{
+		"model": "Phimpme.apps.appshop.appshop_paramters"", 
+		"pk": 2, "fields": {
+			"key": "rebuild_price", 
+			"value":"100"
+		}
+	},
+	{
+		"model": "Phimpme.apps.appshop.appshop_paramters"", 
+		"pk": 3, "fields": {
+			"key": "order_expiry", 
+			"value":"5"
+		}
+	}
+]

@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from Phimpme.apps.orders.models import order
 from Phimpme.apps.usermgt.models import my_login_required
 from Phimpme.apps.appshop.models import appshop_generate
+from django.core.context_processors import request
 # Create your views here.
 
 @my_login_required
@@ -85,4 +86,23 @@ def orders_ordering(request):
         return HttpResponse('{"result":"error","msgstr":"ording failed!%s"}' % e)
 
 
+
+@my_login_required
+def orders_reconf(request):
+    """
+    """
+    try:
+        if request.method == 'POST':
+            old_id = request.POST['id']
+            old_order = order.objects.get(id=old_id)
+            if old_order is not None:
+                raise Exception('old order is not exist')
+            else:
+                new_fetures = ''
+                old_order.fetures = new_fetures
+                old_order.save()
+        else :
+            raise Exception('method is not post ')
+    except Exception, e:
+        return HttpResponse('{"result":"error","msgstr":"ording failed!%s"}' % e)
 

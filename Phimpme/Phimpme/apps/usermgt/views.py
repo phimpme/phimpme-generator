@@ -10,6 +10,13 @@ from django import forms
 
 from django.contrib.auth.models import User
 
+
+'''
+Created on 2014年6月28日
+
+@author: tony
+'''
+
 # Create your views here.
 
 def _login_callback(request, str_):

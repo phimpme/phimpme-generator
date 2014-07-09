@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'Phimpme.apps.usermgt',
     'Phimpme.apps.orders',
+    'Phimpme.apps.appshop',
 )
 
 MIDDLEWARE_CLASSES = (

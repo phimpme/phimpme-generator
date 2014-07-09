@@ -51,7 +51,7 @@
 	function createList(transData){
 		$("#renovateTable *").remove();
 		for(var i = 0,iLen=transData.length;i <iLen; i++){
-			var tmpDiv="<table><tr><td width='10%'>Order No.</td><td width='25%'>App name</td><td width='10%'>Price</td><td width='10%'>Status</td><td width='15%'>Option</td></tr>";
+			var tmpDiv="<table><tr><td width='10%'>Order Number</td><td width='25%'>App Name</td><td width='10%'>Price</td><td width='10%'>Status</td><td width='15%'>Operation</td></tr>";
 			var tempArray=(transData[i].content).split(",");
 			tmpDiv+="<tr>";
 			for(var j = 0,jLen=tempArray.length;j <jLen; j++){
@@ -74,30 +74,14 @@
 		renovateList();
 	})
   </script>
-  <STYLE type="text/css">
-
-	<!-- BODY {
-		BACKGROUND: #fff; MARGIN: 80px auto; FONT: 14px/150% Verdana, Georgia, Sans-Serif; COLOR: #000; TEXT-ALIGN: center
-	}
-	TABLE{MARGIN:10px AUTO;BORDER:0;border-collapse: collapse;width: 100%;}
-	TD{HEIGHT:30PX;BORDER: #84b0c7 1px solid;}
-	DIV {
-		MARGIN: 0px auto;WIDTH: 500px;
-	}
-	H1 {
-		BORDER: #84b0c7 1px solid;PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-SIZE: 20px; BACKGROUND: #eee; PADDING-BOTTOM: 4px; MARGIN: 0px; PADDING-TOP: 4px; BORDER-BOTTOM: #84b0c7 1px solid
-	}
-	input[type="text"],input[type="password"]{width:200px}
-	-->
-	</STYLE>
  </head>
 
  <body>
  <div>
-<a style="display: block;float: left;" href='/cgi-bin/usermgt/logout/' >Logout</a><a style="display: block;float: right;" href='/static/app_config.html' >Generate new app</a>
+<a style="display: block;float: left;" href='/cgi-bin/usermgt/logout/' >Log out</a><a style="display: block;float: right;" href='/static/app_config.html' >Configure new</a>
 </div>
 	 <DIV>
-		<H1>Order history</H1>
+		<H1>List</H1>
 		<div id="renovateTable"></div>
 	</DIV>
  </body>

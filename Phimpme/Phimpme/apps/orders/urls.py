@@ -12,5 +12,6 @@ from Phimpme.apps.orders.views import *
 urlpatterns = patterns('',
     url(r'^order/', orders_ordering),
     url(r'^review/', orders_review),
+    url(r'^reconf_app/', orders_reconf)
 )
 

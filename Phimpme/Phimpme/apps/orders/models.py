@@ -15,5 +15,6 @@ class order(models.Model):
     order_appname = models.CharField(max_length=256)
     order_fetures = models.CharField(max_length=2048)
     order_values = models.IntegerField(default=0)
+    order_rebuild_time = models.DateTimeField(auto_now_add=True)
 
 
