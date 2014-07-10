@@ -5,8 +5,8 @@ import thread
 import time
 from django.db import models
 from Phimpme.apps.orders.models import order
-from Phimpme.apps.usermgt.models import my_login_required
 from django.core.context_processors import request
+from django.contrib.auth.decorators import login_required, permission_required
 # Create your models here.
 
 class appshop_paramters(models.Model):
@@ -17,20 +17,14 @@ class appshop_paramters(models.Model):
 def appshop_get_value(key):
     """
     """
-    try:
-        if key is None :
-            raise Exception('key is None')
-        else :
-            param = appshop_paramters.objects.get(key=key)
-            if param is None:
-                raise Exception('key is not defined')
-            else:
-                if request.POST['value'] is not None:
-                    param.value = request.POST['value']
-                else :
-                    raise Exception('no null value allowed')
-    except Exception, e:
-        return None
+    if key is None :
+        raise Exception('key is None')
+    else :
+        param = appshop_paramters.objects.get(key=key)
+        if param is None:
+            raise Exception('key is not defined')
+        else:
+           return param.value
 
 
 def generate_thread(id, t):
@@ -43,13 +37,16 @@ def generate_thread(id, t):
     if o is None:
         raise Exceptions('order %s be not found' % (id))
     else:
-        o.order_status = 2
+        if o.order_is_rebuild == True:
+            o.order_status = 3
+        else:
+            o.order_status = 2
         # TODO: FIXME :
         o.order_output_file = '/static/output_path/output_example'
         o.save()
     thread.exit_thread()
 
-@my_login_required
+@login_required
 def appshop_generate(request, o):
     """
     """

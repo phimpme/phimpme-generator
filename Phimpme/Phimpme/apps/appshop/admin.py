@@ -12,5 +12,6 @@ class appshopAdmin(admin.ModelAdmin):
     """
     list_display = ('id', 'key', 'value')
 
+# add appshop_paramters model to adminsystem
 admin.site.register(appshop_paramters, appshopAdmin)
 

@@ -1,10 +1,9 @@
 $.extend(validateFunction, {
 	FORM_validate:function() {
-		$("#username").jdValidate(validatePrompt.username, validateFunction.username, true);
 		$("#pwd").jdValidate(validatePrompt.pwd, validateFunction.pwd, true)
 		$("#pwd2").jdValidate(validatePrompt.pwd2, validateFunction.pwd2, true);
 		$("#mail").jdValidate(validatePrompt.mail, validateFunction.mail, true);
-		return validateFunction.FORM_submit(["#username","#pwd","#pwd2","#mail"]);
+		return validateFunction.FORM_submit(["#pwd","#pwd2","#mail"]);
 	}
 });
 
@@ -16,7 +15,6 @@ function registsubmit(){
 			url : "/cgi-bin/usermgt/register/",
 			type : "POST",
 			data:{
-				"username":$("#username").val(),
 				"userpwd":$("#pwd").val(),
 				"email":$("#mail").val()
 			},
@@ -24,10 +22,10 @@ function registsubmit(){
 				var json = eval("(" + data + ")");
 
 				if (json.result == "success") {
-					location.href="/static/login.html";
+					location.href="/cgi-bin/usermgt/login/";
 					return;
 				}else{
-					location.href="/static/error.html";
+					location.href="/static/registration.html";
 					return;
 				}
 			}
@@ -39,16 +37,16 @@ $(document).ready(function(){
 	
 	//默认下用户名框获得焦点
 	setTimeout(function() {
-		$("#username").get(0).focus();
+		$("#mail").get(0).focus();
 	}, 0);
-	//用户名验证
-	$("#username").jdValidate(validatePrompt.username, validateFunction.username);
+	//邮箱验证
+	$("#mail").jdValidate(validatePrompt.mail, validateFunction.mail);
 	//密码验证
 	$("#pwd").bind("keyup",function(){
 		validateFunction.pwdstrength();
 	}).jdValidate(validatePrompt.pwd, validateFunction.pwd)
 	//二次密码验证
 	$("#pwd2").jdValidate(validatePrompt.pwd2, validateFunction.pwd2);
-	//邮箱验证
-	$("#mail").jdValidate(validatePrompt.mail, validateFunction.mail);
+
+
 });

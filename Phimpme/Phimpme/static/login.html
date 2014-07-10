@@ -3,18 +3,18 @@
  <head>
   <title> Login </title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
-  <script type="text/javascript" src="/static/js/login.js"></script>
  </head>
 
  <body>
 	 <DIV>
 		<H1>Login</H1>
+		<form action='/cgi-bin/usermgt/login/' method = 'POST' >
 		<table>
-		<tr><td>Username:</td><td><input id="name" type="text" name="user"></td></tr>
-		<tr><td>Password:</td><td><input id="passwd" type="password" name="pwd"></td></tr>
-		<tr><td></td><td><input type="submit" name="b1" value="Submit" onclick="sendLogin();"></td><td><a href='/static/registration.html' >注册</a></td></tr>
+		<tr><td>Username:</td><td><input id="name" type="text" name="username"></td></tr>
+		<tr><td>Password:</td><td><input id="passwd" type="password" name="userpwd"></td></tr>
+		<tr><td></td><td><input type="submit" name="b1" value="submit" ></td><td><a href='/static/registration.html' >Registeration</a></td></tr>
 		</table>
+		</form>
 	</DIV>
  </body>
 </html>

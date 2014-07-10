@@ -7,9 +7,8 @@ from django.http.response import HttpResponseRedirect
 from django.http.response import HttpResponse
 from django.http import Http404
 from django import forms
-
 from django.contrib.auth.models import User
-
+from django.contrib.auth.decorators import login_required, permission_required
 
 '''
 Created on 2014年6月28日
@@ -19,21 +18,13 @@ Created on 2014年6月28日
 
 # Create your views here.
 
-def _login_callback(request, str_):
-    if request.method == 'GET':
-        return 'loginCallBack(%s)' % str_
-    else:
-        return str_
-
-
 def usermgt_login(request):
     """
     extend Django's login, just for js process, use json instead of http302
     """
     try:
         if request.method == 'GET':
-            username = request.GET.get('username', '').strip('"\' ')
-            userpwd = request.GET.get('userpwd', '').strip('"\' ')
+            return render(request, 'login.html')
         else:
             username = request.POST.get('username', '').strip('"\' ')
             userpwd = request.POST.get('userpwd', '').strip('"\' ')
@@ -48,14 +39,13 @@ def usermgt_login(request):
             else:
                 raise Exception('username:[%s] login fail,no active' % (username))
         else:
-             raise Exception('username:[%s] login fail,no find user' % (username))
+             raise Exception('username:[%s] login fail,authenticate failed' % (username))
         if user is not None and user.is_active:
-            ret = _login_callback(request, '{"result":"success"}')
-            return HttpResponse(ret)
+            return render(request, 'app_config.html', {'user': '%s' % request.user})
         else:
-            return HttpResponse(_login_callback(request, '{"result":"error","errmsg":"password error"}'))
+            raise Exception('login failed, user is not active')
     except Exception, e:
-        return HttpResponse(_login_callback(request, '{"result":"error","errmsg":"password error%s"}' % e))
+        return render(request, 'error.html', {'msg':'%s' % e})
 
 
 
@@ -65,7 +55,7 @@ def usermgt_register(request):
     """
     try:
         if request.method == 'POST':
-            username = request.POST['username']
+            username = request.POST['email']
             userpwd = request.POST['userpwd']
             email = request.POST['email']
             if username is not None and userpwd is not None and email is not None:
@@ -85,7 +75,7 @@ def usermgt_register(request):
         return HttpResponse('{"result":"error","msgstr":"%s"}' % e)
 
 
-
+@login_required
 def usermgt_logout(request):
     """
     logout is always successs
@@ -93,7 +83,25 @@ def usermgt_logout(request):
     try:
         user = request.user
         logout(request)
-        return render_to_response('success.html', {})
+        return render_to_response('success.html', {'msg':'have logout'})
     except Exception, e:
-        return render_to_response('success.html', {})
+        return render_to_response('success.html', {'msg':'have logout'})
+
+@login_required
+def usermgt_changepwd(request):
+    """
+    """
+    if request.method == 'POST':
+        user = request.user
+        op = request.POST['opassword']
+        np1 = request.POST['password1']
+        np2 = request.POST['password2']
+        if np1 == np2 and np1 is not None:
+            if user.check_password(op) == True:
+                user.set_password(np1)
+                return render_to_response('success.html', {'msg':'passwd change succesful'})
+        else:
+            return render_to_response('error.html', {'msg':'passwd change failed'})
+    else :
+        return render_to_response('changepwd.html', {'user':'%s' % request.user})
 

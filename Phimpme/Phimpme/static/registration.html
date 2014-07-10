@@ -11,18 +11,17 @@
 	<form id="formpersonal" method="post" onsubmit="return false;">
 	<div class="form">
 		<div>
-		<a href='/static/login.html' >Back</a>
+		<a href='/cgi-bin/usermgt/login/' >Back</a>
 		</div>
 		<div class="item">
-			<span class="label"><span class="red">*</span>Username:</span>
+			<span class="label"><span class="red">*</span>Email:</span>
 			<div class="fl">
-				<input sta="0" id="username" name="username" class="text" tabindex="1" type="text">
-				<label id="username_succeed" class="blank"></label>
+				<input id="mail" name="mail" class="text" tabindex="4" type="text">
+				<label id="mail_succeed" class="blank"></label>
 				<span class="clear"></span>
-				<div class="null" id="username_error"></div>
+				<div id="mail_error"></div>
 			</div>
 		</div><!--item end-->
-		
 		<div id="o-password">
 			<div class="item">
 				<span class="label"><span class="red">*</span>Set password:</span>
@@ -46,17 +45,6 @@
 			</div><!--item end-->
 			
 		</div><!--o-password end-->
-		
-		<div class="item">
-			<span class="label"><span class="red">*</span>E-mail:</span>
-			<div class="fl">
-				<input id="mail" name="mail" class="text" tabindex="4" type="text">
-				<label id="mail_succeed" class="blank"></label>
-				<span class="clear"></span>
-				<div id="mail_error"></div>
-			</div>
-		</div><!--item end-->
-		
 		<div class="item">
 			<span class="label">&nbsp;</span>
 			<input type ="submit" onclick ="return registsubmit();" value="Register" tabindex="8"/>

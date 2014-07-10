@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.formtools',
     'Phimpme.apps.usermgt',
     'Phimpme.apps.orders',
     'Phimpme.apps.appshop',
@@ -44,7 +45,7 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -117,6 +118,16 @@ LOGIN_REDIRECT_URL = LOGIN_URL
 
 # APP OUT PUT PATH
 OUTPUT_PATH = STATIC_DIR1 + 'generated_apk' + '%Y/%m/%d/'
+
+
+
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+#     'django.template.loaders.eggs.Loader',
+)
+
 
 TEMPLATE_DIR = BASE_DIR + '/Phimpme/static'
 # TEMPLATE_DIRS

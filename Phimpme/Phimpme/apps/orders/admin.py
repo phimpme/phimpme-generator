@@ -12,5 +12,5 @@ class orderAdmin(admin.ModelAdmin):
     list_display = ('id', 'order_related_user', 'order_values', 'order_appname', 'order_created_time', 'order_fetures')
 
 
-
+# add order model to adminsystem
 admin.site.register(order, orderAdmin)
