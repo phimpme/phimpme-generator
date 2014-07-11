@@ -9,7 +9,7 @@ from django.http import Http404
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
-
+from Phimpme.apps.orders.views import orders_process
 '''
 Created on 2014年6月28日
 
@@ -41,6 +41,10 @@ def usermgt_login(request):
         else:
              raise Exception('username:[%s] login fail,authenticate failed' % (username))
         if user is not None and user.is_active:
+            if request.session['app_name'] is not None :
+                orders_process(request.user, request.session['app_name'], request.session['app_package'], request.session['enables'])
+                request.session['app_name'] = None
+                return render(request, 'success.html', {'msg': 'now will continue your order...', 'url':'cgi-bin/orders/review/'})
             return render(request, 'app_config.html', {'user': '%s' % request.user})
         else:
             raise Exception('login failed, user is not active')
