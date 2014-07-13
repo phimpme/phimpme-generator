@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # coding:utf-8
 
-import thread
-import time
+import thread, time, os
 from django.db import models
 from Phimpme.apps.orders.models import order
 from django.core.context_processors import request
@@ -32,7 +31,7 @@ def generate_thread(id, t):
     TODO:FIXME: porting real generate interface
         call generate(app_name, app_logo, enables) instead
     """
-    time.sleep(t)
+    #time.sleep(t)
     o = order.objects.get(id=id)
     if o is None:
         raise Exceptions('order %s be not found' % (id))
@@ -41,8 +40,13 @@ def generate_thread(id, t):
             o.order_status = 3
         else:
             o.order_status = 2
-        # TODO: FIXME :
-        o.order_output_file = '/static/output_path/output_example'
+        # generator script
+        web_path = '/static/output_path/' + str(id) + '.apk'
+        abs_path = os.path.abspath('Phimpme' + web_path)
+        from gen_script import generate
+        generate(order_id = id, output_path = abs_path, app_name = o.order_appname, app_logo = None, enables = eval(o.order_fetures))
+
+        o.order_output_file = web_path
         o.save()
     thread.exit_thread()
 

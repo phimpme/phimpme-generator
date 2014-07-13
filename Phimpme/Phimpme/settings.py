@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.formtools',
     'Phimpme.apps.usermgt',
     'Phimpme.apps.orders',
-    'Phimpme.apps.appshop',
+    'Phimpme.apps.appshop'
 )
 
 MIDDLEWARE_CLASSES = (
