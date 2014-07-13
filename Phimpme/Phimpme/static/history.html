@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> History </title>
+  <meta http-equiv="content-type" content="text/html,no-cache; charset=utf-8">
+ </head>
+<script language="Javascript">
+var ccontrol=true;
+function CheckForm(transThis, form_name)
+{
+	if(transThis.value == "delete"){
+		  if(confirm("delete order ?")==true) {
+			  ccontrol=true;
+			  document.getElementById(form_name).submit();
+
+		  } else {
+			  ccontrol=false;
+		    return false;
+		  }
+	}
+	document.getElementById(form_name).submit();
+}
+function CheckSubmit(){
+	return ccontrol;
+}
+</script>
+
+ <body>
+ <div>
+ <ul>
+<a style="display: block;float: left;" href='/cgi-bin/usermgt/logout/' >Log out</a><a style="display: block;float: right;" href='/' >Configure new</a>
+</ul>
+</br></br></br></br>
+</div>
+	 <DIV>
+		<H1>List</H1>
+		<div id="renovateTable"></div>
+	</DIV>
+	<div>
+	<table border>
+	<tr><td width='25px'>Id</td>
+	<td width='200px'>Created time</td>
+	<td width='200px'>Due time</td>
+	<td width='100px'> App Name </td>
+	<td width='100px' >Package</td>
+	<td width='50px'> Price </td><td width='50px'> Status </td><td width='220px'>Operation </td></tr>
+	</table>
+	{% for obj in all_order %}
+	<form action='/cgi-bin/orders/history/' id='form{{obj.id}}' method = 'POST' onSubmit="return CheckSubmit();" >
+	<table border>
+	<tr>
+		<td width='20px'><input style="width:20px;text-align:center;" name='id' value='{{ obj.id }}' readonly='readonly' ></iput></td>
+		<td width='200px'>{{ obj.order_created_time }}</td>
+		<td width='200px'>{{ obj.order_due_time }}</td>
+		<td width='100px'>{{ obj.order_appname }}</td>
+		<td width='100px'>{{ obj.order_package }}</td>
+		<td width='50px'>{{ obj.order_values }}</td>
+		<td width='50px'>{{ obj.order_status}}</td>	
+		<td width='220px'>{% if obj.order_status == 3 %}
+		<a href='{{ obj.order_output_file}}' >Download </a>
+		<input  id ='delete' type="submit" name='operation' value='delete' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
+		{% elif obj.order_status == 2 %}
+		<a href='{{ obj.order_output_file}}' >Download </a><input  id ='reconf' type="submit" name='operation' value='reconf' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
+		<input  id ='delete' type="submit" name='operation' value='delete' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
+		{% elif  obj.order_status == 0 %}
+		<input id ='pay'  type="submit" name='operation' value='pay' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
+		<input  id ='delete' type="submit" name='operation' value='delete' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
+		{% else %}
+		<a>just waiting</a>
+		{% endif %}
+		</td>
+		</tr>
+	</table>
+	</form>
+	{% endfor %}
+	</div>
+ </body>
+</html>

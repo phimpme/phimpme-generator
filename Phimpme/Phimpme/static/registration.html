@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> Registration </title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+
+<div id="formbox">
+	<form id="formpersonal" method="post" onsubmit="return false;">
+	<div class="form">
+		<div>
+		<a href='/cgi-bin/usermgt/login/' >Back</a>
+		</div>
+		<div class="item">
+			<span class="label"><span class="red">*</span>Email:</span>
+			<div class="fl">
+				<input id="mail" name="mail" class="text" tabindex="4" type="text">
+				<label id="mail_succeed" class="blank"></label>
+				<span class="clear"></span>
+				<div id="mail_error"></div>
+			</div>
+		</div><!--item end-->
+		<div id="o-password">
+			<div class="item">
+				<span class="label"><span class="red">*</span>Set password:</span>
+				<div class="fl">
+					<input id="pwd" name="pwd" class="text" tabindex="2" type="password">
+					<label id="pwd_succeed" class="blank"></label>
+					<span class="clear"></span>
+					<label class="hide" id="pwdstrength"><span class="fl">Security:</span><b></b></label>
+					<label id="pwd_error"></label>
+				</div>
+			</div><!--item end-->
+			
+			<div class="item">
+				<span class="label"><span class="red">*</span>Verify password:</span>
+				<div class="fl">
+					<input id="pwd2" name="pwd2" class="text" tabindex="3" type="password">
+					<label id="pwd2_succeed" class="blank"></label>
+					<span class="clear"></span>
+					<label id="pwd2_error"></label>
+				</div>
+			</div><!--item end-->
+			
+		</div><!--o-password end-->
+		<div class="item">
+			<span class="label">&nbsp;</span>
+			<input type ="submit" onclick ="return registsubmit();" value="Register" tabindex="8"/>
+		</div><!--item end-->
+		
+	</div>
+	</form>
+</div><!--formbox end-->
+<script type="text/javascript" src="js/Validate.js"></script>
+<script type="text/javascript" src="js/Validate.form.js"></script>
+ </body>
+</html>

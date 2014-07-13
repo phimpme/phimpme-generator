@@ -28,43 +28,53 @@ def set_enable(path, enables):
     content = open(configuration_java, 'r').read()
     # Disable all before enabling selected features
     content = re.sub(r'(ENABLE_.*=).*;', r'\1 false;', content)
+    print(enables)
+    print(type(enables))
     for feature in enables:
         # RegEx string, something like "ENABLE_XXX = true;"
         # "\s*" means 0 or more spaces
         # TODO: make sure 'feature' contains only capitals and underlines
         re_str = feature + r"\s*=.*;"
         target_str = feature + " = true;"
+        print(feature)
         content, count = re.subn(re_str, target_str, content)
         assert(count == 1)
     open(configuration_java, 'w').write(content)
 
-def compile(path):
+def compile_apk(path, output_path):
     gradlew = path + "/gradlew"
     # os.chmod(gradlew, stat.S_IEXEC)
     os.system("chmod 777 " + gradlew)  # TODO: Why os.chmod and chmod +x don't work?
-    ret = os.system("cd " + path + " && " + gradlew + " assembleDebug")  # TODO: Change to release
-    #os.system("cp " + path + "/Phimpme/build/outputs/apk/*.apk ./")
-    return ret, path + "/Phimpme/build/outputs/apk/Phimpme-debug-unaligned.apk"
+    ret = os.system("cd " + path + " && " + gradlew + " assembleDebug") # TODO: Change to release
+    if ret != 0:
+        raise Exceptions("Generation failed")
+    print("cp " + path + "/Phimpme/build/outputs/apk/Phimpme-debug.apk " + output_path)
+    os.system("cp " + path + "/Phimpme/build/outputs/apk/Phimpme-debug.apk " + output_path)
+    #return ret, path + "/Phimpme/build/outputs/apk/Phimpme-debug-unaligned.apk"
 
-def copy_project(src_path):
-    dest_path = "/tmp/Phimpme"
+def copy_project(src_path, order_id):
+    assert(isinstance(order_id, int))
+    dest_path = "/tmp/Phimpme/" + str(order_id)
     os.system("rm -r " + dest_path)
+    os.system("mkdir -p " + dest_path)
     #import subprocess
     #print subprocess.check_output("cp -r " + src_path + " " + dest_path)
-    r = os.system("cp -r " + src_path + " " + dest_path)
+    r = os.system("cp -r " + src_path + " " + dest_path + '/')
+    dest_path = dest_path + "/Phimpme"
     assert(r == 0)
     return dest_path
 
-def generate(app_name, app_logo, enables):
+def generate(order_id, output_path, app_name, app_logo, enables):
     import sys
     reload(sys)
     sys.setdefaultencoding('utf-8')
+    # TODO: Change it to the path of the source code of Phimp.me Android app
     template_path = "/Users/yzq/Documents/GitHub/phimpme-android/Phimpme"
-    path = copy_project(template_path)
+    path = copy_project(template_path, order_id)
     set_name(path, app_name)
     set_logo(path, app_logo)
     set_enable(path, enables)
-    return compile(path)
+    compile_apk(path, output_path)
 
 if __name__ == "__main__":
-    generate(app_name="YZQ-Phimpme", app_logo=None, enables=['ENABLE_MAP', 'ENABLE_PHOTO_CAPTURING', 'ENABLE_PHOTO_MANIPULATION'])
+    generate(order_id = 0, output_path = "./output.apk", app_name="TEST-Phimpme", app_logo=None, enables=['ENABLE_MAP', 'ENABLE_PHOTO_CAPTURING', 'ENABLE_PHOTO_MANIPULATION'])

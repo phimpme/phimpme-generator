@@ -6,10 +6,27 @@
 </head>
 
 <body>
-<form id="form1" name="form1" method="post" action="">{% csrf_token  %}
+<div>
+<ul>
+{% if user %}
+<li><a style="display: block; float: left;" href='/cgi-bin/usermgt/logout/' >Log out</a> <a style="display: block;float: right;" href='/cgi-bin/orders/review' >order history</a></li>
+<li><a style="display: block; float: left;" href='/cgi-bin/usermgt/changepwd/'>Welcome {{ user }}</a></li>
+{% else %}
+<li><a style="display: block; float: left;" href='/cgi-bin/usermgt/login/'>Log in</a><a style="display: block;float: right;" href='/cgi-bin/orders/review' > order history </a></li>
+{% endif %}
+
+</ul>
+</div>
+<div>
+<form action='/cgi-bin/orders/order/' method = 'POST'>
+<table>
   <p>
     App name:
-    <input name="app_name" type="text"/>
+    <input id="app_name" name="app_name" type="text" value = '{{ appname }}' {% if appname %} readonly="readonly" {% endif %}/>
+  </p>
+   <p>
+    Package name:
+    <input id="app_package" name="app_package" type="text" value = '{{ app_package }}' {% if app_package %} readonly="readonly" {% endif %}/>
   </p>
   <p>App logo: Not supported yet</p>
   <p>Functions:</p>
@@ -37,10 +54,12 @@
     <input type="checkbox" name="enable_nfc" id="enable_nfc" />
     <label for="enable_nfc">Enable NFC</label>
   </p>
-  <p>In this experimental version, IT TAKES ABOUT 37 SECONDS TO GENERATE, and there would be NO RESPONSE during the period of time. If generated sucessfully,  downloading will start automatically.</p>
   <p>
-    <input type="submit" name="submit" id="submit" value="Submit" />
+    <input type="submit" name="submit" id="submit" value="Submit"/>
   </p>
+  </table>
 </form>
+</div>
+
 </body>
 </html>

@@ -1,1 +1,3 @@
 *.pyc
+Phimpme/db.sqlite3
+Phimpme/Phimpme/static/output_path
