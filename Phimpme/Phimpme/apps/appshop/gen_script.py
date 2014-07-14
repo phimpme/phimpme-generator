@@ -59,8 +59,7 @@ def copy_project(src_path, order_id):
     os.system("mkdir -p " + dest_path)
     #import subprocess
     #print subprocess.check_output("cp -r " + src_path + " " + dest_path)
-    r = os.system("cp -r " + src_path + " " + dest_path + '/')
-    dest_path = dest_path + "/Phimpme"
+    r = os.system("cp -r " + src_path + "/* " + dest_path + '/')
     assert(r == 0)
     return dest_path
 
@@ -75,6 +74,7 @@ def generate(order_id, output_path, app_name, app_logo, enables):
     set_logo(path, app_logo)
     set_enable(path, enables)
     compile_apk(path, output_path)
+    # TODO: remove tmp files
 
 if __name__ == "__main__":
     generate(order_id = 0, output_path = "./output.apk", app_name="TEST-Phimpme", app_logo=None, enables=['ENABLE_MAP', 'ENABLE_PHOTO_CAPTURING', 'ENABLE_PHOTO_MANIPULATION'])
