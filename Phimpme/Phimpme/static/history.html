@@ -3,6 +3,17 @@
  <head>
   <title> History </title>
   <meta http-equiv="content-type" content="text/html,no-cache; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="icon" href="http://getbootstrap.com/favicon.ico">
+<!-- Optional theme -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
  </head>
 <script language="Javascript">
 var ccontrol=true;
@@ -26,18 +37,70 @@ function CheckSubmit(){
 </script>
 
  <body>
- <div>
- <ul>
+ <div class="navbar navbar-inverse navbar-fixed-top" >
+	<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Phimpme </a> 
+			</div>
+
+
+       <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">GenApp</a></li>
+
+			<li  class="active">
+				<a href='/cgi-bin/orders/review'>Orders</a> 
+			</li>       
+			
+			<li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+			{% if user %}
+			</ul>
+			<ul  class="nav navbar-nav navbar-right" >
+			<li>
+				<a href='/cgi-bin/usermgt/changepwd/'>Welcome {{ user }}</a>
+			</li>
+			<li>
+				<a href='/cgi-bin/usermgt/logout/'>Log out</a>
+			</li>
+			</ul>
+			{% else %}
+ 			</ul>
+			
+ 
+          <form class="navbar-form navbar-right" role="form"  action='/cgi-bin/usermgt/login/' method = 'POST' >
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+          
+          {% endif %}
+          
+		</div>
+			
+		</div>
+	</div>
+<!--  <ul>
 <a style="display: block;float: left;" href='/cgi-bin/usermgt/logout/' >Log out</a><a style="display: block;float: right;" href='/' >Configure new</a>
 </ul>
 </br></br></br></br>
-</div>
-	 <DIV>
-		<H1>List</H1>
-		<div id="renovateTable"></div>
-	</DIV>
-	<div>
-	<table border>
+</div> -->
+
+</br></br></br></br>
+	 <DIV class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">
+		<H1 class="sub-header">Order List</H1>
+	<div id="renovateTable" class="table-responsive">
+	<table class = "table table-striped">
 	<tr><td width='25px'>Id</td>
 	<td width='200px'>Created time</td>
 	<td width='200px'>Due time</td>
@@ -47,7 +110,7 @@ function CheckSubmit(){
 	</table>
 	{% for obj in all_order %}
 	<form action='/cgi-bin/orders/history/' id='form{{obj.id}}' method = 'POST' onSubmit="return CheckSubmit();" >
-	<table border>
+	<table class="table table-striped">
 	<tr>
 		<td width='20px'><input style="width:20px;text-align:center;" name='id' value='{{ obj.id }}' readonly='readonly' ></iput></td>
 		<td width='200px'>{{ obj.order_created_time }}</td>
@@ -60,11 +123,12 @@ function CheckSubmit(){
 		<a href='{{ obj.order_output_file}}' >Download </a>
 		<input  id ='delete' type="submit" name='operation' value='delete' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
 		{% elif obj.order_status == 2 %}
-		<a href='{{ obj.order_output_file}}' >Download </a><input  id ='reconf' type="submit" name='operation' value='reconf' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
-		<input  id ='delete' type="submit" name='operation' value='delete' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
+		<input  class="btn btn-sm btn-info" id ='reconf' type="submit" name='operation' value='reconf' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
+		<input  id ='delete' class="btn btn-sm btn-danger" type="submit" name='operation' value='delete' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
+		<a href='{{ obj.order_output_file}}' class="btn btn-sm btn-link">Download </a>
 		{% elif  obj.order_status == 0 %}
-		<input id ='pay'  type="submit" name='operation' value='pay' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
-		<input  id ='delete' type="submit" name='operation' value='delete' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
+		<input id ='pay'  class="btn btn-sm btn-primary" type="submit" name='operation' value='pay' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
+		<input  id ='delete' class="btn btn-sm btn-danger" type="submit" name='operation' value='delete' onclick="CheckForm(this, 'form{{ obj.id }}');"></input>
 		{% else %}
 		<a>just waiting</a>
 		{% endif %}

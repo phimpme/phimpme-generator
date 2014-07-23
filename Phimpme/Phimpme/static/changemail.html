@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="http://getbootstrap.com/favicon.ico">
-<title>Change Email</title>
+<title>Change Password</title>
 <base target="_self">
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
 <!-- Latest compiled and minified CSS -->
@@ -30,28 +30,20 @@
   </tr>
   <tr>
     <td width="31">&nbsp;</td>
-    <td width="450"><form class="container"  method="POST" action="/cgi-bin/usermgt/changepwd/">
+    <td width="450"><form class="container"  method="POST" action="/cgi-bin/usermgt/changemail/">
       <p><b>Please enter password info</b></p>
       <table>
           <tr>
-          <td width="200">Username:</td>
+          <td width="200">Username(Email):</td>
           <td width="200"><a> {{ user }}</td>
         </tr>
-        {% if active_key %}
-        	<input name= "active_key" value="{{ active_key }}" hidden >
-        {% else %}
         <tr>
-          <td width="200" >Old Password:</td>
-          <td width="200"><input class="form-control" type="password" name="opassword" size="32" maxlength="32" placeholder="Enter Old Passwd"></td>
+          <td width="200" >New Email:</td>
+          <td width="200"><input class="form-control" type="text" name="email" size="32" maxlength="32" placeholder="Enter New Email"></td>
         </tr>
-        {% endif %}
         <tr>
-          <td width="200">New Password:</td>
-          <td width="200"><input class="form-control" type="password" name="password1" size="32" maxlength="32" value = '' placeholder="Enter New Passwd"></td>
-        </tr>
-         <tr>
-          <td width="200">Confirm New Password:</td>
-          <td width="200"><input class="form-control" type="password" name="password2" size="32" maxlength="32" value = '' placeholder="ReEnter New Passwd"></td>
+          <td width="200">Password:</td>
+          <td width="200"><input class="form-control" type="password" name="password" size="32" maxlength="32" value = '' placeholder="Enter Your Passwd"></td>
         </tr>
       </table>
       <p>

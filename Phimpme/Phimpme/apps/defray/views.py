@@ -25,10 +25,16 @@ def defray_pay(request):
 
 
             if o is not None:
-                if appshop_generate(request, o) is True:
-                    o.order_status = 1
+                try:
+                    if appshop_generate(request, o) is True:
+                        o.order_status = 1
+                        o.save()
+                        return render_to_response('success.html', {'url':'cgi-bin/orders/review/'})
+                except Exception, e:
+                    o.order_status = 0xf
                     o.save()
-                return render_to_response('success.html', {'url':'cgi-bin/orders/review/'})
+                    return render_to_response('error.html', {'msg':'generate Failed(%s)' % e, 'url':'cgi-bin/orders/review/'})
+
             raise Exception('no such id %s' % id)
         else:
             raise Exception('method is not POST')

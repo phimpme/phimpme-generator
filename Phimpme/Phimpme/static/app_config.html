@@ -2,64 +2,198 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="http://getbootstrap.com/favicon.ico">
+	
 <title>Phimpme Generator</title>
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet"
+		href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script
+			src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<div>
-<ul>
-{% if user %}
-<li><a style="display: block; float: left;" href='/cgi-bin/usermgt/logout/' >Log out</a> <a style="display: block;float: right;" href='/cgi-bin/orders/review' >order history</a></li>
-<li><a style="display: block; float: left;" href='/cgi-bin/usermgt/changepwd/'>Welcome {{ user }}</a></li>
-{% else %}
-<li><a style="display: block; float: left;" href='/cgi-bin/usermgt/login/'>Log in</a><a style="display: block;float: right;" href='/cgi-bin/orders/review' > order history </a></li>
-{% endif %}
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Phimpme </a> 
+			</div>
 
-</ul>
-</div>
-<div>
-<form action='/cgi-bin/orders/order/' method = 'POST'>
-<table>
-  <p>
-    App name:
-    <input id="app_name" name="app_name" type="text" value = '{{ appname }}' {% if appname %} readonly="readonly" {% endif %}/>
-  </p>
-   <p>
-    Package name:
-    <input id="app_package" name="app_package" type="text" value = '{{ app_package }}' {% if app_package %} readonly="readonly" {% endif %}/>
-  </p>
-  <p>App logo: Not supported yet</p>
-  <p>Functions:</p>
-  <p>
-    <input type="checkbox" name="enable_map" id="enable_map" />
-    <label for="enable_map">Enable map</label>
-  </p>
-  <p>
-    <input type="checkbox" name="enable_photo_capturing" id="enable_photo_capturing" />
-    <label for="enable_photo_capturing">Enable photo capturing</label>
-  </p>
-  <p>
-    <input type="checkbox" name="enable_choose_from_library" id="enable_choose_from_library" />
-    <label for="enable_choose_from_library">Enable choose from library</label>
-  </p>
-  <p>
-    <input type="checkbox" name="enable_photo_manipulation" id="enable_photo_manipulation" />
-     <label for="enable_photo_manipulation">Enable photo manipulation</label>
-  </p>
-  <p>
-    <input type="checkbox" name="enable_photo_location_modification" id="enable_photo_location_modification" />
-    <label for="enable_photo_location_modification">Enable photo location modification</label>
-  </p>
-  <p>
-    <input type="checkbox" name="enable_nfc" id="enable_nfc" />
-    <label for="enable_nfc">Enable NFC</label>
-  </p>
-  <p>
-    <input type="submit" name="submit" id="submit" value="Submit"/>
-  </p>
-  </table>
-</form>
-</div>
 
+       <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">GenApp</a></li>
+
+			<li>
+				<a href='/cgi-bin/orders/review'>Orders</a> 
+			</li>       
+			
+			<li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+			{% if user %}
+			</ul>
+			<ul  class="nav navbar-nav navbar-right" >
+			<li class="dropdownd">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#" >Welcome {{ user }}
+				<span class="caret"></span>
+				</a>
+				<ul role="menu" class="dropdown-menu">
+	            <li><a href="/cgi-bin/usermgt/changepwd/">Change Password</a></li>
+                <li><a href="/cgi-bin/usermgt/changemail/">Change Email</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+			<li>
+				<a href='/cgi-bin/usermgt/logout/'>Log out</a>
+			</li>
+			</ul>
+			{% else %}
+ 			</ul>
+			
+ 
+          <form class="navbar-form navbar-right" role="form"  action='/cgi-bin/usermgt/login/' method = 'POST' >
+            <div class="form-group">
+              <input  name="username"  type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input  name="userpwd"  type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+            <a  href="/static/registration.html" class="btn btn-primary" >Sign up</a>
+            <a  href="/cgi-bin/usermgt/regain/" >Forget Your Password?</a>
+          </form>
+          
+          {% endif %}
+          
+			</div>
+			
+		</div>
+	</div>
+	
+	<br>
+	<br>
+	<div class="raw">
+	<div class="col-sm-8 blog-main">
+	<div class="page-header">
+        <h1>Generater</h1>
+        <p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information.</p>
+    </div>
+	<div class="container">
+		<form class="container" action='/cgi-bin/orders/order/' method='POST'>
+		<div class ="row">
+		 <div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					App Name: 
+				<input  placeholder="App Name"  class="form-control" id="app_name" name="app_name" type="text"
+						value='{{ appname }}' {% if appname %} readonly="readonly" {% endif %}/>
+				</label>
+		</div><div class="container">
+				<label   class="col-xs-6 col-sm-4" >
+					Package Name: <input placeholder="Package Name"   class="form-control"  id="app_package" name="app_package"
+						type="text" value='{{ app_package }}'
+						{% if app_package %} readonly="readonly" {% endif %}/>
+				</label>
+		</div><div class="container">
+				<label   class="col-xs-6 col-sm-4" >App logo: Not supported yet</label>
+		</div><div class="container">
+				<label   class="col-xs-6 col-sm-4" >Functions:</label>
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_map" id="enable_map" /> <label
+						for="enable_map">Enable map</label>
+				</label>
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_photo_capturing"
+						id="enable_photo_capturing" /> <label
+						for="enable_photo_capturing">Enable photo capturing</label>
+				</label>
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_choose_from_library"
+						id="enable_choose_from_library" /> <label
+						for="enable_choose_from_library">Enable choose from
+						library</label>
+				</label>
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_photo_manipulation"
+						id="enable_photo_manipulation" /> <label
+						for="enable_photo_manipulation">Enable photo manipulation</label>
+				</label>
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_photo_location_modification"
+						id="enable_photo_location_modification" /> <label
+						for="enable_photo_location_modification">Enable photo
+						location modification</label>
+				</label>
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_nfc" id="enable_nfc" /> <label
+						for="enable_nfc">Enable NFC</label>
+				</label>
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="submit" name="submit" id="submit" value="Submit" class ="btn btn-lg btn-primary btn-block"/>
+				</label>
+		</div>
+		</div>
+		</div>
+		</form>
+	</div>
+
+	<br>
+	<br>
+	<div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">March 2014</a></li>
+              <li><a href="#">February 2014</a></li>
+              <li><a href="#">January 2014</a></li>
+              <li><a href="#">December 2013</a></li>
+              <li><a href="#">November 2013</a></li>
+              <li><a href="#">October 2013</a></li>
+              <li><a href="#">September 2013</a></li>
+              <li><a href="#">August 2013</a></li>
+              <li><a href="#">July 2013</a></li>
+              <li><a href="#">June 2013</a></li>
+              <li><a href="#">May 2013</a></li>
+              <li><a href="#">April 2013</a></li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">GitHub</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+            </ol>
+          </div>
+        </div>
+       	</div>
 </body>
 </html>

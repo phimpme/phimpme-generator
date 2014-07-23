@@ -3,10 +3,37 @@
  <head>
   <title> Login </title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+ <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+ <!-- Latest compiled and minified CSS -->
+ <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+ <!-- Optional theme -->
+ <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	
+    <!-- Custom styles for this template -->
+<link rel="stylesheet" href="js/signin.css">
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/static/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
  </head>
 
  <body>
-	 <DIV>
+<!-- 	 <DIV>
 		<H1>Login</H1>
 		<form action='/cgi-bin/usermgt/login/' method = 'POST' >
 		<table>
@@ -15,6 +42,19 @@
 		<tr><td></td><td><input type="submit" name="b1" value="submit" ></td><td><a href='/static/registration.html' >Registeration</a></td></tr>
 		</table>
 		</form>
-	</DIV>
+	</DIV> -->
+	
+	<div class="container">
+
+      <form role="form" class="form-signin"  action='/cgi-bin/usermgt/login/' method = 'POST' >
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input id="name"  name="username"  type="email" autofocus="" required="" placeholder="Email address" class="form-control">
+        <input id="passwd" type="password" name="userpwd" required="" placeholder="Password" class="form-control">
+ <td><a href='/static/registration.html' >Registeration</a></td></tr>
+	
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+      </form>
+
+    </div>
  </body>
 </html>

@@ -3,11 +3,30 @@
 <title> Error </title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> 
 <META http-equiv=refresh content=3;URL=/{{url}}>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="icon" href="http://getbootstrap.com/favicon.ico">
+<!-- Optional theme -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 </HEAD>
 <BODY>
-<DIV>
+ 
+<DIV class="panel panel-danger">
+<div  class="panel-heading">
 <h1>Error </h1>
+</div >
+<div  class="panel-body">
 <h3> {% if msg %}{{ msg }} {% endif %} </h3>
 <h3>auto redirect after 3 seconds </h3>
-</DIV></BODY></HTML>
+</div>
+</DIV>
+ 
+</BODY>
+
+</HTML>

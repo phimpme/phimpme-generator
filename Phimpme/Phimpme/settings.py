@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.conf.global_settings import EMAIL_PORT, EMAIL_HOST_USER, \
+    EMAIL_HOST_PASSWORD, EMAIL_USE_TLS
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -39,7 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.formtools',
     'Phimpme.apps.usermgt',
     'Phimpme.apps.orders',
-    'Phimpme.apps.appshop'
+    'Phimpme.apps.appshop',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -134,3 +136,16 @@ TEMPLATE_DIR = BASE_DIR + '/Phimpme/static'
 TEMPLATE_DIRS = (
     TEMPLATE_DIR,
 )
+
+
+
+# configure email host
+# refer to:
+#     http://service.mail.qq.com/cgi-bin/help?subtype=1&&no=166&&id=28
+#     http://service.mail.qq.com/cgi-bin/help?subtype=1&&no=167&&id=28
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'ht6100@qq.com'  # username or username@xx.com, as your email provider request
+EMAIL_HOST_PASSWORD = 'yybyrzjsw'
+#EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

@@ -3,20 +3,45 @@
  <head>
   <title> Registration </title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<link rel="icon" href="http://getbootstrap.com/favicon.ico">
+  <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="js/signin.css">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 
-<div id="formbox">
-	<form id="formpersonal" method="post" onsubmit="return false;">
+<div id="formbox" class= "container">
+	<form id="formpersonal" method="post"  class="form-signin" onsubmit="return false;">
 	<div class="form">
-		<div>
-		<a href='/cgi-bin/usermgt/login/' >Back</a>
+		<div role="button">
+		<a class="btn btn-default" role="button" href='/cgi-bin/usermgt/login/' >Back</a>
 		</div>
 		<div class="item">
-			<span class="label"><span class="red">*</span>Email:</span>
+			<span class="label label-info"><span class="red">*</span>Email:</span>
 			<div class="fl">
-				<input id="mail" name="mail" class="text" tabindex="4" type="text">
+				<input placeholder="Email" class="form-control" id="mail" name="mail" class="text" tabindex="4" type="text">
 				<label id="mail_succeed" class="blank"></label>
 				<span class="clear"></span>
 				<div id="mail_error"></div>
@@ -24,9 +49,9 @@
 		</div><!--item end-->
 		<div id="o-password">
 			<div class="item">
-				<span class="label"><span class="red">*</span>Set password:</span>
+				<span class="label label-info"><span class="red">*</span>Set password:</span>
 				<div class="fl">
-					<input id="pwd" name="pwd" class="text" tabindex="2" type="password">
+					<input placeholder="Password" class="form-control" id="pwd" name="pwd" class="text" tabindex="2" type="password">
 					<label id="pwd_succeed" class="blank"></label>
 					<span class="clear"></span>
 					<label class="hide" id="pwdstrength"><span class="fl">Security:</span><b></b></label>
@@ -34,10 +59,10 @@
 				</div>
 			</div><!--item end-->
 			
-			<div class="item">
-				<span class="label"><span class="red">*</span>Verify password:</span>
+			<div  class="item">
+				<span class="label label-info"><span class="red">*</span>Verify password:</span>
 				<div class="fl">
-					<input id="pwd2" name="pwd2" class="text" tabindex="3" type="password">
+					<input placeholder="Password" class="form-control" id="pwd2" name="pwd2" class="text" tabindex="3" type="password">
 					<label id="pwd2_succeed" class="blank"></label>
 					<span class="clear"></span>
 					<label id="pwd2_error"></label>
@@ -47,12 +72,16 @@
 		</div><!--o-password end-->
 		<div class="item">
 			<span class="label">&nbsp;</span>
-			<input type ="submit" onclick ="return registsubmit();" value="Register" tabindex="8"/>
+			<input class="btn btn-lg btn-primary btn-block" type ="submit" onclick ="return registsubmit();" value="Register" tabindex="8"/>
 		</div><!--item end-->
 		
 	</div>
 	</form>
 </div><!--formbox end-->
+
+
+
+
 <script type="text/javascript" src="js/Validate.js"></script>
 <script type="text/javascript" src="js/Validate.form.js"></script>
  </body>

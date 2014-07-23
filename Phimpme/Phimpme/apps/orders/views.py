@@ -56,7 +56,7 @@ def orders_review(request):
     try:
         user = request.user
         orders = order.objects.filter(order_related_user=user).exclude(order_status=-1)
-        return render_to_response('history.html', {'all_order':orders})
+        return render_to_response('history.html', {'all_order':orders, 'user':user})
     except Exception, e:
         return render_to_response('error.html', {'msg':'%s' % e, 'url':'/'})
 
@@ -66,7 +66,7 @@ def orders_process(user, app_name, app_package, enables):
     oa = None
     order_values = int(appshop_get_value('first_build_price'))
     delta = int(appshop_get_value('order_expiry'))
-    oas = order.objects.filter(order_related_user=user, order_appname=app_name, order_is_rebuild=False)
+    oas = order.objects.filter(order_related_user=user, order_appname=app_name)
 
     if oas is not None and len(oas) != 0 :
         oa = oas[0]
@@ -87,7 +87,7 @@ def orders_process(user, app_name, app_package, enables):
             order_related_user=user, order_status=0, \
             order_appname=app_name, \
             order_fetures=str(enables), order_values=order_values, \
-            order_package=app_package, order_is_rebuild=True, \
+            order_package=app_package, \
             order_due_time=due_time)
     oa.save()
 
