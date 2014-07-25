@@ -145,7 +145,7 @@ TEMPLATE_DIRS = (
 #     http://service.mail.qq.com/cgi-bin/help?subtype=1&&no=167&&id=28
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'ht6100@qq.com'  # username or username@xx.com, as your email provider request
-EMAIL_HOST_PASSWORD = 'yybyrzjsw'
+EMAIL_HOST_USER = 'xxxxxxx@qq.com'  # username or username@xx.com, as your email provider request
+EMAIL_HOST_PASSWORD = 'xxxxxxxx'
 #EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

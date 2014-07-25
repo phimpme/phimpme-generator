@@ -71,10 +71,10 @@
  
           <form class="navbar-form navbar-right" role="form"  action='/cgi-bin/usermgt/login/' method = 'POST' >
             <div class="form-group">
-              <input  name="username"  type="text" placeholder="Email" class="form-control">
+              <input  name="username"  type="email" required=""  placeholder="Email" class="form-control">
             </div>
             <div class="form-group">
-              <input  name="userpwd"  type="password" placeholder="Password" class="form-control">
+              <input  name="userpwd"  type="password" required=""  placeholder="Password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
             <a  href="/static/registration.html" class="btn btn-primary" >Sign up</a>
@@ -102,12 +102,12 @@
 		 <div class="container">
 				<label class="col-xs-6 col-sm-4" >
 					App Name: 
-				<input  placeholder="App Name"  class="form-control" id="app_name" name="app_name" type="text"
+				<input  placeholder="App Name"  class="form-control" id="app_name" name="app_name"  required="" type="text"
 						value='{{ appname }}' {% if appname %} readonly="readonly" {% endif %}/>
 				</label>
 		</div><div class="container">
 				<label   class="col-xs-6 col-sm-4" >
-					Package Name: <input placeholder="Package Name"   class="form-control"  id="app_package" name="app_package"
+					Package Name: <input placeholder="Package Name"   class="form-control"  id="app_package"  required=""  name="app_package"
 						type="text" value='{{ app_package }}'
 						{% if app_package %} readonly="readonly" {% endif %}/>
 				</label>
@@ -153,10 +153,14 @@
 				</label>
 		</div><div class="container">
 				<label class="col-xs-6 col-sm-4" >
-					<input type="submit" name="submit" id="submit" value="Submit" class ="btn btn-lg btn-primary btn-block"/>
+					<input type="submit" name="submit" id="submit" value="Generate" class ="btn btn-lg btn-primary btn-block"/>
 				</label>
 		</div>
 		</div>
+		<p class="text-muted">
+          By clicking "Generate", you agree to our
+          <a target="_blank" href="/static/privacy.html">privacy policy</a>. <span class="js-email-notice">We will send you account related emails occasionally.</span>
+        </p>
 		</div>
 		</form>
 	</div>

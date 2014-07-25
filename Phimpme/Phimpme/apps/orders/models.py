@@ -17,6 +17,7 @@ class order(models.Model):
     order_fetures = models.CharField(max_length=2048)
     order_values = models.IntegerField(default=0)
     order_due_time = models.DateTimeField()
+    order_is_rebuild = models.BooleanField(default=False)
 
 
 

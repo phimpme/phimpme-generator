@@ -1,0 +1,5 @@
+PyYAML>=3.10
+docopt>=0.6.1
+coverage>=3.6
+requests>=1.0.0
+sh>=1.08

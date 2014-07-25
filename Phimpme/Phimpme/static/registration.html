@@ -31,7 +31,29 @@
     <![endif]-->
 </head>
 <body>
+	<div class="navbar navbar-inverse" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">Phimpme </a> 
+			</div>
 
+
+       <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+			<li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+		
+ 			</ul>
+ 		</div>
+ 		</div>
+ 		</div>
+ 		
 <div id="formbox" class= "container">
 	<form id="formpersonal" method="post"  class="form-signin" onsubmit="return false;">
 	<div class="form">
@@ -41,7 +63,7 @@
 		<div class="item">
 			<span class="label label-info"><span class="red">*</span>Email:</span>
 			<div class="fl">
-				<input placeholder="Email" class="form-control" id="mail" name="mail" class="text" tabindex="4" type="text">
+				<input placeholder="Email"  required=""  class="form-control" id="mail" name="mail" class="text" tabindex="4" type="email">
 				<label id="mail_succeed" class="blank"></label>
 				<span class="clear"></span>
 				<div id="mail_error"></div>
@@ -51,7 +73,7 @@
 			<div class="item">
 				<span class="label label-info"><span class="red">*</span>Set password:</span>
 				<div class="fl">
-					<input placeholder="Password" class="form-control" id="pwd" name="pwd" class="text" tabindex="2" type="password">
+					<input placeholder="Password"  required=""  class="form-control" id="pwd" name="pwd" class="text" tabindex="2" type="password">
 					<label id="pwd_succeed" class="blank"></label>
 					<span class="clear"></span>
 					<label class="hide" id="pwdstrength"><span class="fl">Security:</span><b></b></label>
@@ -62,7 +84,7 @@
 			<div  class="item">
 				<span class="label label-info"><span class="red">*</span>Verify password:</span>
 				<div class="fl">
-					<input placeholder="Password" class="form-control" id="pwd2" name="pwd2" class="text" tabindex="3" type="password">
+					<input placeholder="Password"  required=""  class="form-control" id="pwd2" name="pwd2" class="text" tabindex="3" type="password">
 					<label id="pwd2_succeed" class="blank"></label>
 					<span class="clear"></span>
 					<label id="pwd2_error"></label>

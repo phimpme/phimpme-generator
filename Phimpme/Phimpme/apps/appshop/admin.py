@@ -10,7 +10,7 @@ from Phimpme.apps.appshop.models import appshop_paramters
 class appshopAdmin(admin.ModelAdmin):
     """
     """
-    list_display = ('id', 'key', 'value')
+    list_display = ('id', 'key_name', 'value')
 
 # add appshop_paramters model to adminsystem
 admin.site.register(appshop_paramters, appshopAdmin)

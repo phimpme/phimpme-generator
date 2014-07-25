@@ -2,7 +2,7 @@
 	{
 		"model": "appshop.appshop_paramters", 
 		"pk": 1, "fields": {
-			"key": "first_build_price", 
+			"key_name": "first_build_price", 
 			"value":"100"
 		}
 	},
@@ -10,14 +10,14 @@
 	{
 		"model": "appshop.appshop_paramters", 
 		"pk": 2, "fields": {
-			"key": "rebuild_price", 
+			"key_name": "rebuild_price", 
 			"value":"50"
 		}
 	},
 	{
 		"model": "appshop.appshop_paramters", 
 		"pk": 3, "fields": {
-			"key": "order_expiry", 
+			"key_name": "order_expiry", 
 			"value":"60"
 		}
 	}

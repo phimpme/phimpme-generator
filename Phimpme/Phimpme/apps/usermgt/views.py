@@ -16,7 +16,7 @@ from Phimpme.apps.usermgt.models import passwd_regain
 from Phimpme.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail
 import random
-from datetime import datetime
+import datetime
 import time, string
 '''
 Created on 2014年6月28日

@@ -30,7 +30,7 @@ def home(request):
 
 
 @login_required
-def order_opation_switch(request):
+def order_operation_switch(request):
     """
      define which operation we support
     """
@@ -66,7 +66,7 @@ def orders_process(user, app_name, app_package, enables):
     oa = None
     order_values = int(appshop_get_value('first_build_price'))
     delta = int(appshop_get_value('order_expiry'))
-    oas = order.objects.filter(order_related_user=user, order_appname=app_name)
+    oas = order.objects.filter(order_related_user=user, order_appname=app_name, order_is_rebuild=False)
 
     if oas is not None and len(oas) != 0 :
         oa = oas[0]
@@ -87,7 +87,7 @@ def orders_process(user, app_name, app_package, enables):
             order_related_user=user, order_status=0, \
             order_appname=app_name, \
             order_fetures=str(enables), order_values=order_values, \
-            order_package=app_package, \
+            order_package=app_package, order_is_rebuild=True, \
             order_due_time=due_time)
     oa.save()
 

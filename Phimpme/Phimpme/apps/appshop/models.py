@@ -9,19 +9,19 @@ from django.contrib.auth.decorators import login_required, permission_required
 # Create your models here.
 
 class appshop_paramters(models.Model):
-    key = models.CharField(max_length=256)
+    key_name = models.CharField(max_length=256)
     value = models.CharField(max_length=256)
 
 
-def appshop_get_value(key):
+def appshop_get_value(key_name):
     """
     """
-    if key is None :
+    if key_name is None :
         raise Exception('key is None')
     else :
-        param = appshop_paramters.objects.get(key=key)
+        param = appshop_paramters.objects.get(key_name=key_name)
         if param is None:
-            raise Exception('key is not defined')
+            raise Exception('key_name is not defined')
         else:
            return param.value
 

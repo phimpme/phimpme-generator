@@ -19,7 +19,28 @@
 </head>
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+	<div class="navbar navbar-inverse" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">Phimpme </a> 
+			</div>
 
+
+       <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+			<li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+		
+ 			</ul>
+ 		</div>
+ 		</div>
+ 		</div>
 <div class="jumbotron">
 <table class="container"  width="392" border="0" cellpadding="0" cellspacing="0">
   
@@ -42,16 +63,16 @@
         {% else %}
         <tr>
           <td width="200" >Old Password:</td>
-          <td width="200"><input class="form-control" type="password" name="opassword" size="32" maxlength="32" placeholder="Enter Old Passwd"></td>
+          <td width="200"><input class="form-control" type="password" name="opassword" size="32" maxlength="32" autofocus="" required="" placeholder="Enter Old Passwd"></td>
         </tr>
         {% endif %}
         <tr>
           <td width="200">New Password:</td>
-          <td width="200"><input class="form-control" type="password" name="password1" size="32" maxlength="32" value = '' placeholder="Enter New Passwd"></td>
+          <td width="200"><input class="form-control" type="password" name="password1" size="32" maxlength="32" value = ''  required="" placeholder="Enter New Passwd"></td>
         </tr>
          <tr>
           <td width="200">Confirm New Password:</td>
-          <td width="200"><input class="form-control" type="password" name="password2" size="32" maxlength="32" value = '' placeholder="ReEnter New Passwd"></td>
+          <td width="200"><input class="form-control" type="password" name="password2" size="32" maxlength="32" value = ''  required="" placeholder="ReEnter New Passwd"></td>
         </tr>
       </table>
       <p>
