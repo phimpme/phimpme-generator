@@ -18,6 +18,9 @@ class order(models.Model):
     order_values = models.IntegerField(default=0)
     order_due_time = models.DateTimeField()
     order_is_rebuild = models.BooleanField(default=False)
+    order_payment_id = models.CharField(max_length=256)
+    order_payer_id = models.CharField(max_length=256)
+
 
 
 

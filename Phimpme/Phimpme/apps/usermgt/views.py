@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding:utf-8
-
+import thread
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render_to_response, render
 from django.http.response import HttpResponseRedirect
@@ -13,7 +13,7 @@ from Phimpme.apps.orders.views import orders_process
 from Phimpme.apps.usermgt.models import passwd_regain
 
 
-from Phimpme.settings import EMAIL_HOST_USER
+from Phimpme.settings import EMAIL_HOST_USER, DOMAIN_NAME
 from django.core.mail import send_mail
 import random
 import datetime
@@ -177,7 +177,7 @@ def usermgt_changemail(request):
 
 
 def usermgt_sendmail(to_users, key):
-    send_mail('Reset Your Password!', 'click the url http://192.168.56.101:8000/cgi-bin/usermgt/regain/?active_key=%s' % key,
+    send_mail('Reset Your Password!', 'click the url http://%s/cgi-bin/usermgt/regain/?active_key=%s' % (DOMAIN_NAME, key),
                              EMAIL_HOST_USER, to_users)
     thread.exit_thread()
 

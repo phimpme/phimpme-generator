@@ -13,7 +13,9 @@ from Phimpme.apps.orders.models import order
 from Phimpme.apps.appshop.models import appshop_generate
 from django.core.context_processors import request
 from Phimpme.apps.appshop.models import *
-from Phimpme.apps.defray.views import defray_pay
+from Phimpme.apps.defray.views import paypal_create
+from Phimpme.settings import BASE_DIR
+
 # Create your views here.
 
 
@@ -35,11 +37,15 @@ def order_operation_switch(request):
      define which operation we support
     """
     id = request.POST['id']
-    if request.POST['operation'] == 'pay':
-        return defray_pay(request)
-    elif request.POST['operation'] == 'reconf':
+    if request.POST['operation'] == 'Pay':
+        return paypal_create(request)
+    elif request.POST['operation'] == 'Reconf':
         return orders_reconf(request)
-    elif request.POST['operation'] == 'delete':
+    elif request.POST['operation'] == 'Download':
+        return orders_download(request)
+    elif request.POST['operation'] == 'Rebuild':
+        return orders_rebuild(request)
+    elif request.POST['operation'] == 'Delete':
          o = order.objects.get(id=id)
          if o is not None:
              o.order_status = -1
@@ -134,6 +140,48 @@ def orders_preordering(request):
     return orders_ordering(request)
 
 
+@login_required
+def orders_download(request):
+    try:
+        if request.method == 'POST':
+            old_id = request.POST['id']
+            old_order = order.objects.get(id=old_id)
+            if old_order is None:
+                raise Exception('order is not exist')
+            else:
+                path = BASE_DIR + '/Phimpme' + old_order.order_output_file
+                f = open(path)
+                data = f.read()
+                f.close()
+                response = HttpResponse(data, content_type='application/octet-stream')
+                response['Content-Disposition'] = 'attachment; filename=%s.apk' % old_order.order_appname
+                return response
+        else :
+            raise Exception('method is not post ')
+    except Exception, e:
+        return render_to_response('error.html', {'msg':'%s' % e, 'url':'/'})
+
+
+@login_required
+def orders_rebuild(request):
+    try:
+        if request.method == 'POST':
+            old_id = request.POST['id']
+            old_order = order.objects.get(id=old_id)
+            if old_order is None:
+                raise Exception('old order is not exist')
+            else:
+                if appshop_generate(request, old_order) :
+                    if old_order.order_is_rebuild:
+                        old_order.order_status = 3
+                    else :
+                        old_order.order_status = 2
+
+                return render_to_response('success.html', {'msg': 'rebuild OK', 'url':'cgi-bin/orders/review/'})
+        else :
+            raise Exception('method is not post ')
+    except Exception, e:
+        return render_to_response('error.html', {'msg':'%s' % e, 'url':'/'})
 
 @login_required
 def orders_reconf(request):

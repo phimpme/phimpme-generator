@@ -1,5 +1,5 @@
 """
-Django settings for Phimpme project.
+Django settingsfor Phimpme project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -28,6 +28,14 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DOMAIN_NAME = '192.168.56.101:8000'
+# Paypal options
+PAYPAL_MODE = 'sandbox'  # sandbox or live
+PAYPAL_CLIENT_ID = 'AUVEihBfbBCQzLxaTjNdhzV16yI-PvQEHDJblP6P4Ba1Fr5cu_CAZdO0-5IM'
+PAYPAL_CLIENT_SECRET = 'EF5uIBClqoo--0oIhKeFtaa-ciCgL34WDkhyQbBslM7_MHZe2DHkNJTAM9pD'
+
+
+
 
 # Application definition
 
@@ -42,6 +50,7 @@ INSTALLED_APPS = (
     'Phimpme.apps.usermgt',
     'Phimpme.apps.orders',
     'Phimpme.apps.appshop',
+    'paypalrestsdk',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -60,11 +69,16 @@ WSGI_APPLICATION = 'Phimpme.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Phimpme',
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'OPTIONS':{
+            'init_command':'SET storage_engine=INNODB',
+        }, 
     }
 }
 
@@ -147,5 +161,5 @@ EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'xxxxxxx@qq.com'  # username or username@xx.com, as your email provider request
 EMAIL_HOST_PASSWORD = 'xxxxxxxx'
-#EMAIL_USE_TLS = True
+# EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
