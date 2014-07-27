@@ -8,12 +8,15 @@ Installation
 
 This repo contains a Django website, and the generator script ([gen_script.py](Phimpme/generator/gen_script.py)).
 To test the whole website:
+
 1. [Install Django](https://www.djangoproject.com/download/)
-2. Go to the root of this repo and execute `python manage.py syncdb` to create the SQLite database file and create admin account.
-3. Execute `python manage.py loaddata Phimpme/apps/appshop/appshop.json` to load settings.
-4. Change settings to [configure PayPal REST APIs](../../wiki#paypal-rest-api-configuration).
-5. Execute `python manage.py runserver` to start the web server.
-6. Then you will see the website through http://localhost.
+2. Add `site-packages` floder into `sys.path` of Python  
+`sys.path.insert(0, os.path.join(root, 'site-packages'))`
+3. Go to the root of this repo and execute `python manage.py syncdb` to create the SQLite database file and create admin account.
+4. Execute `python manage.py loaddata Phimpme/apps/appshop/appshop.json` to load settings.
+5. Change settings to [configure PayPal REST APIs](../../wiki#paypal-rest-api-configuration).
+6. Execute `python manage.py runserver` to start the web server.
+7. Then you will see the website through http://localhost.
 
 Also you need the Android SDK to run the generator script. You can see details in [the wiki of Phimp.me Android app](https://github.com/phimpme/android/wiki#build-in-command-line).
 
