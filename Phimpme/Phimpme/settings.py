@@ -34,10 +34,9 @@ PAYPAL_MODE = 'sandbox'  # sandbox or live
 PAYPAL_CLIENT_ID = 'AUVEihBfbBCQzLxaTjNdhzV16yI-PvQEHDJblP6P4Ba1Fr5cu_CAZdO0-5IM'
 PAYPAL_CLIENT_SECRET = 'EF5uIBClqoo--0oIhKeFtaa-ciCgL34WDkhyQbBslM7_MHZe2DHkNJTAM9pD'
 
-
-
-
 # Application definition
+import sys
+sys.path.insert(0, os.path.join(BASE_DIR, 'site-packages'))
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -70,15 +69,19 @@ WSGI_APPLICATION = 'Phimpme.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'Phimpme',
+    #     'HOST': 'localhost',
+    #     'USER': 'root',
+    #     'PASSWORD': 'root',
+    #     'OPTIONS':{
+    #         'init_command':'SET storage_engine=INNODB',
+    #     }, 
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Phimpme',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'OPTIONS':{
-            'init_command':'SET storage_engine=INNODB',
-        }, 
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

@@ -6,12 +6,14 @@ The whole project includes this repo and the Android app. It aims to create a ph
 Installation
 -------
 
-This repo contains a Django website, and the generator script ([gen_script.py](Phimpme/generator/gen_script.py)).
+This repo contains a Django website, and the generator script ([gen_script.py](phimpme/generator/blob/master/Phimpme/Phimpme/settings.py)).
 To test the whole website:
 
 1. [Install Django](https://www.djangoproject.com/download/)
-2. Add `site-packages` floder into `sys.path` of Python  
-`sys.path.insert(0, os.path.join(root, 'site-packages'))`
+2. Go to `Phimpme/Phimpme/apps/appshop/gen_script.py` you will see  
+`template_path = "/Users/yzq/Documents/GitHub/phimpme-android/Phimpme"`  
+Change it to the path of the source code of Phimp.me Android app.
+3. Create a `local.properties` file in Phimp.me Android app, as described in [the app wiki](https://github.com/phimpme/android/wiki#build-in-command-line).
 3. Go to the root of this repo and execute `python manage.py syncdb` to create the SQLite database file and create admin account.
 4. Execute `python manage.py loaddata Phimpme/apps/appshop/appshop.json` to load settings.
 5. Change settings to [configure PayPal REST APIs](../../wiki#paypal-rest-api-configuration).
