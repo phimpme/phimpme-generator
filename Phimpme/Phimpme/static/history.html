@@ -98,19 +98,20 @@ function CheckSubmit(){
 
 </br></br></br></br>
 	 <DIV class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">
-		<H1 class="sub-header">Order List</H1>
+		<H1 class="sub-header">Order history</H1>
 	<div id="renovateTable" class="table-responsive">
 	<table class = "table table-striped">
-	<tr><td width='25px'>Id</td>
-	<td width='150ppx'>Created time</td>
-	<td width='150ppx'>Due time</td>
-	<td width='100px'> App Name </td>
-	<td width='100px' >Package</td>
+	<tr>
+	<td width='25px'>ID</td>
+	<td width='150ppx'>Creation date</td>
+	<td width='150ppx'>Support period due</td>
+	<td width='100px'> App name </td>
+	<td width='100px' >Package name</td>
 	<td width='50px'> Price </td><td width='150ppx'> Status </td><td width='220px'>Operation </td></tr>
 	</table>
-	{% for obj in all_order %}
 	<form action='/cgi-bin/orders/history/' id='form{{obj.id}}' method = 'POST' onSubmit="return CheckSubmit();" >
 	<table class="table table-striped">
+    {% for obj in all_order %}
 	<tr>
 		<td width='20px'><input style="width:20px;text-align:center;" name='id' value='{{ obj.id }}' readonly='readonly' ></iput></td>
 		<td width='150px'>{{ obj.order_created_time }}</td>
@@ -149,9 +150,9 @@ function CheckSubmit(){
 		{% endif %}
 		</td>
 		</tr>
+        {% endfor %}
 	</table>
 	</form>
-	{% endfor %}
 	</div>
  </body>
 </html>

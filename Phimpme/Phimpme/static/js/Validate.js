@@ -12,28 +12,28 @@ var validateRegExp = {
     num1:"^[1-9]\\d*|0$", //正数（正整数 + 0）
     num2:"^-[1-9]\\d*|0$", //负数（负整数 + 0）
     ascii:"^[\\x00-\\xFF]+$", //仅ACSII字符
-    chinese:"^[\\u4e00-\\u9fa5]+$", //仅中文
-    color:"^[a-fA-F0-9]{6}$", //颜色
-    date:"^\\d{4}(\\-|\\/|\.)\\d{1,2}\\1\\d{1,2}$", //日期
-    email:"^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$", //邮件
-    idcard:"^[1-9]([0-9]{14}|[0-9]{17})$", //身份证
+    chinese:"^[\\u4e00-\\u9fa5]+$",
+    color:"^[a-fA-F0-9]{6}$",
+    date:"^\\d{4}(\\-|\\/|\.)\\d{1,2}\\1\\d{1,2}$",
+    email:"^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$",
+    idcard:"^[1-9]([0-9]{14}|[0-9]{17})$",
     ip4:"^(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)$", //ip地址
     letter:"^[A-Za-z]+$", //字母
     letter_l:"^[a-z]+$", //小写字母
     letter_u:"^[A-Z]+$", //大写字母
-    mobile:"^0?(13|15|18)[0-9]{9}$", //手机
+    mobile:"^0?(13|15|18)[0-9]{9}$",
     notempty:"^\\S+$", //非空
-    password:"^.*[A-Za-z0-9\\w_-]+.*$", //密码
+    password:"^.*[A-Za-z0-9\\w_-]+.*$",
     fullNumber:"^[0-9]+$", //数字
     picture:"(.*)\\.(jpg|bmp|gif|ico|pcx|jpeg|tif|png|raw|tga)$", //图片
     qq:"^[1-9]*[1-9][0-9]*$", //QQ号码
     rar:"(.*)\\.(rar|zip|7zip|tgz)$", //压缩文件
     tel:"^[0-9\-()（）]{7,18}$", //电话号码的函数(包括验证国内区号,国际区号,分机号)
     url:"^http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?$", //url
-    username:"^[A-Za-z0-9_\\-\\u4e00-\\u9fa5]+$", //用户名
+    username:"^[A-Za-z0-9_\\-\\u4e00-\\u9fa5]+$",
     deptname:"^[A-Za-z0-9_()（）\\-\\u4e00-\\u9fa5]+$", //单位名
     zipcode:"^\\d{6}$", //邮编
-    realname:"^[A-Za-z\\u4e00-\\u9fa5]+$", // 真实姓名
+    realname:"^[A-Za-z\\u4e00-\\u9fa5]+$",
     companyname:"^[A-Za-z0-9_()（）\\-\\u4e00-\\u9fa5]+$",
     companyaddr:"^[A-Za-z0-9_()（）\\#\\-\\u4e00-\\u9fa5]+$",
     companysite:"^http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&#=]*)?$"
@@ -272,43 +272,43 @@ var validateRules = {
 //验证文本
 var validatePrompt = {
     username:{
-        onFocus:"4-20位字符，可由中文、英文、数字及“_”、“-”组成",
+        onFocus:"4-20 charaters, contain only letters, digits, - and _",
         succeed:"",
-        isNull:"请输入用户名",
+        isNull:"Please enter the username",
         error:{
-            beUsed:"该用户名已被使用，请使用其它用户名注册",
-            badLength:"用户名长度只能在4-20位字符之间",
-            badFormat:"用户名只能由中文、英文、数字及“_”、“-”组成",
-            fullNumberName:"用户名不能全为数字"
+            beUsed:"Username is already been used.",
+            badLength:"The length of username should be within 4-20 characters",
+            badFormat:"Username should contain only letters, digits, - and _",
+            fullNumberName:"Username cannot be pure numbers"
         }
     },
     pwd:{
-        onFocus:"6-16位字符，可由英文、数字及标点符号组成",
+        onFocus:"6-16 charaters",
         succeed:"",
-        isNull:"请输入密码",
+        isNull:"Please enter the password",
         error:{
-            badLength:"密码长度只能在6-16位字符之间",
-            badFormat:"密码只能由英文、数字及标点符号组成"
+            badLength:"The length of password should be within 6-16 characters",
+            badFormat:"Password should contain only letters, digits, and symbols"
         }
     },
     pwd2:{
-        onFocus:"请再次输入密码",
+        onFocus:"Please re-enter the password",
         succeed:"",
-        isNull:"请输入密码",
+        isNull:"Please enter the password",
         error:{
-            badLength:"密码长度只能在6-16位字符之间",
-            badFormat2:"两次输入密码不一致",
-            badFormat1:"密码只能由英文、数字及标点符号组成"
+            badLength:"The length of password should be within 6-16 characters",
+            badFormat2:"Password does not match",
+            badFormat1:"Password should contain only letters, digits, and symbols"
         }
     },
     mail:{
-        onFocus:"请输入常用的邮箱",
+        onFocus:"Please enter the e-mail address",
         succeed:"",
-        isNull:"请输入邮箱",
+        isNull:"Please enter the e-mail address",
         error:{
-            beUsed:"该邮箱已被使用，请更换其它邮箱",
-            badFormat:"邮箱格式不正确",
-            badLength:"您填写的邮箱过长，邮件地址只能在50个字符以内"
+            beUsed:"This e-mail address has already been used",
+            badFormat:"Wrong format",
+            badLength:"E-mail address should be shorter than 50 characters"
         }
     }
 };
@@ -396,7 +396,7 @@ var validateFunction = {
     referrer:function (option) {
         var bool = validateRules.isNull(option.value);
         if (bool) {
-            option.element.val("可不填");
+            option.element.val("Optional");
             return;
         } else {
             validateSettings.succeed.run(option);
