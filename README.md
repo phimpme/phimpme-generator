@@ -16,13 +16,14 @@ Change it to the path of the source code of Phimp.me Android app.
 3. Create a `local.properties` file in Phimp.me Android app, as described in [the app wiki](https://github.com/phimpme/android/wiki#build-in-command-line).
 3. Go to the root of this repo and execute `python manage.py syncdb` to create the SQLite database file and create admin account.
 4. Execute `python manage.py loaddata Phimpme/apps/appshop/appshop.json` to load settings.
-5. Change settings to [configure PayPal REST APIs](../../wiki#paypal-rest-api-configuration).
-6. Execute `python manage.py runserver` to start the web server.
-7. Then you will see the website through http://localhost.
+5. Execute `python manage.py runserver` to start the web server.
+6. Then you will see the website through http://localhost.
 
 Also you need the Android SDK to run the generator script. You can see details in [the wiki of Phimp.me Android app](https://github.com/phimpme/android/wiki#build-in-command-line).
 
 To test the generator script alone, open the py file and the last several lines will help you.
+
+If you want to deploy this website into a production environment, **DO NOT FOLLOW THE STEPS ABOVE**. See the [deployment part in the wiki](../../wiki#deployment) instead.
 
 Development Environment
 -------
