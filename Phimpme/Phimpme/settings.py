@@ -10,8 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from django.conf.global_settings import EMAIL_PORT, EMAIL_HOST_USER, \
-    EMAIL_HOST_PASSWORD, EMAIL_USE_TLS
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -36,29 +35,30 @@ PAYPAL_CLIENT_SECRET = 'EF5uIBClqoo--0oIhKeFtaa-ciCgL34WDkhyQbBslM7_MHZe2DHkNJTA
 
 # Application definition
 import sys
+
 sys.path.insert(0, os.path.join(BASE_DIR, 'site-packages'))
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.formtools',
-    'Phimpme.apps.usermgt',
-    'Phimpme.apps.orders',
-    'Phimpme.apps.appshop',
-    'paypalrestsdk',
+	'django.contrib.admin',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
+	'django.contrib.formtools',
+	'Phimpme.apps.usermgt',
+	'Phimpme.apps.orders',
+	'Phimpme.apps.appshop',
+	'paypalrestsdk',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	# 'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'Phimpme.urls'
@@ -69,20 +69,20 @@ WSGI_APPLICATION = 'Phimpme.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'Phimpme',
-    #     'HOST': 'localhost',
-    #     'USER': 'root',
-    #     'PASSWORD': 'root',
-    #     'OPTIONS':{
-    #         'init_command':'SET storage_engine=INNODB',
-    #     }, 
-    # }
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+	# 'default': {
+	# 'ENGINE': 'django.db.backends.mysql',
+	#     'NAME': 'Phimpme',
+	#     'HOST': 'localhost',
+	#     'USER': 'root',
+	#     'PASSWORD': 'root',
+	#     'OPTIONS':{
+	#         'init_command':'SET storage_engine=INNODB',
+	#     },
+	# }
+	'default': {
+		'ENGINE': 'django.db.backends.sqlite3',
+		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	}
 }
 
 # Internationalization
@@ -91,7 +91,6 @@ DATABASES = {
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Shanghai'
-
 
 USE_I18N = True
 
@@ -110,7 +109,7 @@ FILE_CHARSET = 'utf-8'
 # Email address that error messages come from.
 SERVER_EMAIL = 'root@localhost'
 
-############
+# ###########
 # SESSIONS #
 ############
 SESSION_COOKIE_NAME = 'sessionid'  # Cookie name. This can be whatever you want.
@@ -127,7 +126,7 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATIC_DIR1 = BASE_DIR + '/Phimpme/static/'
 STATICFILES_DIRS = (
-    STATIC_DIR1,
+	STATIC_DIR1,
 )
 STATIC_URL = '/static/'
 
@@ -142,24 +141,23 @@ OUTPUT_PATH = STATIC_DIR1 + 'generated_apk' + '%Y/%m/%d/'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+	'django.template.loaders.filesystem.Loader',
+	'django.template.loaders.app_directories.Loader',
+	#     'django.template.loaders.eggs.Loader',
 )
-
 
 TEMPLATE_DIR = BASE_DIR + '/Phimpme/static'
 # TEMPLATE_DIRS
 TEMPLATE_DIRS = (
-    TEMPLATE_DIR,
+	TEMPLATE_DIR,
 )
 
 
 
 # configure email host
-EMAIL_HOST = 'smtp.qq.com' # SMTP server
-EMAIL_PORT = 25 # SMTP port
-EMAIL_HOST_USER = 'xxxxxxx@qq.com' # E-mail address
+EMAIL_HOST = 'smtp.qq.com'  # SMTP server
+EMAIL_PORT = 25  # SMTP port
+EMAIL_HOST_USER = 'xxxxxxx@qq.com'  # E-mail address
 EMAIL_HOST_PASSWORD = 'xxxxxxxx'
 # EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

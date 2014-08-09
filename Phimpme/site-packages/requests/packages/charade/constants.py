@@ -1,4 +1,4 @@
-######################## BEGIN LICENSE BLOCK ########################
+# ####################### BEGIN LICENSE BLOCK ########################
 # The Original Code is Mozilla Universal charset detector code.
 #
 # The Initial Developer of the Original Code is
