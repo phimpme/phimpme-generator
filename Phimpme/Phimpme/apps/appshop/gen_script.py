@@ -4,7 +4,7 @@
 # To test it, simplely run this file
 # The output APK will be put in the working directory
 
-import os, re
+import os, re, shutil, stat
 
 def set_name(path, app_name):
     re_str = r'<string name="app_name">.*</string>'
@@ -42,26 +42,19 @@ def set_enable(path, enables):
     open(configuration_java, 'w').write(content)
 
 def compile_apk(path, output_path):
-    gradlew = path + "/gradlew"
-    # os.chmod(gradlew, stat.S_IEXEC)
-    os.system("chmod 777 " + gradlew)  # TODO: Why os.chmod and chmod +x don't work?
-    ret = os.system("cd " + path + " && " + gradlew + " assembleDebug") # TODO: Change to release
+    gradlew = os.path.join(path, "gradlew")
+    os.chmod(gradlew, os.stat(gradlew).st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
+    ret = os.system("cd " + path + " && " + gradlew + " assembleDebug")  # TODO: Change to release
     if ret != 0:
-        raise Exceptions("Generation failed")
-    print("cp " + path + "/Phimpme/build/outputs/apk/Phimpme-debug.apk " + output_path)
-    os.system("cp " + path + "/Phimpme/build/outputs/apk/Phimpme-debug.apk " + output_path)
-    #return ret, path + "/Phimpme/build/outputs/apk/Phimpme-debug-unaligned.apk"
+        raise Exception("Generation failed")
+    shutil.copy(os.path.join(path, "Phimpme/build/outputs/apk/Phimpme-debug.apk"), output_path)
 
 def copy_project(src_path, order_id):
     assert(isinstance(order_id, int))
-    dest_path = "/tmp/Phimpme/" + str(order_id)
-    os.system("rm -r " + dest_path)
-    os.system("mkdir -p " + dest_path)
-    #import subprocess
-    #print subprocess.check_output("cp -r " + src_path + " " + dest_path)
-    r = os.system("cp -r " + src_path + "/* " + dest_path + '/')
-    assert(r == 0)
-    return dest_path
+    dest_path = os.path.join("/tmp/Phimpme/", str(order_id))
+    shutil.rmtree(dest_path, ignore_errors=True)
+    os.makedirs(dest_path)
+    shutil.copytree(src_path, dest_path)
 
 def generate(order_id, output_path, app_name, app_logo, enables):
     import sys
@@ -77,4 +70,4 @@ def generate(order_id, output_path, app_name, app_logo, enables):
     # TODO: remove tmp files
 
 if __name__ == "__main__":
-    generate(order_id = 0, output_path = "./output.apk", app_name="TEST-Phimpme", app_logo=None, enables=['ENABLE_MAP', 'ENABLE_PHOTO_CAPTURING', 'ENABLE_PHOTO_MANIPULATION'])
+    generate(order_id=0, output_path="./output.apk", app_name="TEST-Phimpme", app_logo=None, enables=['ENABLE_MAP', 'ENABLE_PHOTO_CAPTURING', 'ENABLE_PHOTO_MANIPULATION'])
