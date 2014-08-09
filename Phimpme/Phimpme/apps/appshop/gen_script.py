@@ -21,10 +21,12 @@ def set_package_name(path, package_name):
     pass
 
 def set_logo(path, app_logo):
-    pass
+    if app_logo != None and os.path.isfile(app_logo):
+        src_logo_path = os.path.join(path, "Phimpme/src/main/res/drawable-xxhdpi/ic_launcher.png")
+        shutil.copy(app_logo, src_logo_path)
 
 def set_enable(path, enables):
-    configuration_java = path + "/Phimpme/src/main/java/com/phimpme/phimpme/Configuration.java"
+    configuration_java = os.path.join(path, "Phimpme/src/main/java/com/phimpme/phimpme/Configuration.java")
     content = open(configuration_java, 'r').read()
     # Disable all before enabling selected features
     content = re.sub(r'(ENABLE_.*=).*;', r'\1 false;', content)
@@ -53,8 +55,8 @@ def copy_project(src_path, order_id):
     assert(isinstance(order_id, int))
     dest_path = os.path.join("/tmp/Phimpme/", str(order_id))
     shutil.rmtree(dest_path, ignore_errors=True)
-    os.makedirs(dest_path)
     shutil.copytree(src_path, dest_path)
+    return dest_path
 
 def generate(order_id, output_path, app_name, app_logo, enables):
     import sys
@@ -62,6 +64,7 @@ def generate(order_id, output_path, app_name, app_logo, enables):
     sys.setdefaultencoding('utf-8')
     # TODO: Change it to the path of the source code of Phimp.me Android app
     template_path = "/Users/yzq/Documents/GitHub/phimpme-android/Phimpme"
+    assert(os.path.isdir(template_path))
     path = copy_project(template_path, order_id)
     set_name(path, app_name)
     set_logo(path, app_logo)
