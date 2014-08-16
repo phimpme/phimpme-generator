@@ -2,59 +2,61 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="http://getbootstrap.com/favicon.ico">
-	<title>Forget Password</title>
-	<base target="_self">
-	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="http://getbootstrap.com/favicon.ico">
+<title>Forget Password</title>
+<base target="_self">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
-<div class="navbar navbar-inverse" role="navigation">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-			        data-target=".navbar-collapse">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="/">Phimpme </a>
-		</div>
-
-
-		<div class="collapse navbar-collapse">
-			<ul class="nav navbar-nav">
-				<li><a href="#about">About</a></li>
-				<li><a href="#contact">Contact</a></li>
-
-			</ul>
-		</div>
-	</div>
-</div>
-<div class="jumbotron">
-	<div class="container">
-		<form method="post" action="/cgi-bin/usermgt/regain/">
-			<div class="panel-heading"><b>Forget password</b></div>
-			<div class="panel-body">
-				<label for="email_field">Email</label>
-				<input type="email" name="email" id="email_field" class="form-control"
-				       placeholder="Enter Your Email Here" autofocus required="">
-				<input type="submit" class="btn btn-primary" value="Submit" name="commit">
+	<div class="navbar navbar-inverse" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">Phimpme </a> 
 			</div>
-		</form>
 
-	</div>
+
+       <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+			<li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+		
+ 			</ul>
+ 		</div>
+ 		</div>
+ 		</div>
+<div class="jumbotron">
+<div class="container">
+  <form method="post"  action="/cgi-bin/usermgt/regain/">
+  <div  class="panel panel-default" >
+    <div class="panel-heading">
+      <h3>Forgot password</h1>
+    </div>
+    <div class="panel-body">
+      <label for="email_field">Email</label>
+      <input type="email" name="email" id="email_field" class="form-control" placeholder="Enter Your Email Here" autofocus="autofocus"  required="" >
+      <input type="submit" class="btn btn-primary" value="Submit" name="commit" >
+    </div>
+</form>
+
+</div>
 </div>
 
 </body>

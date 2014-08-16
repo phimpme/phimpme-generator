@@ -5,6 +5,6 @@ from django.contrib.auth.models import User
 
 
 class passwd_regain(models.Model):
-	user = models.ForeignKey(User)
-	date = models.DateTimeField(auto_now_add=True)
-	active_key = models.CharField(max_length=256)
+    user = models.ForeignKey(User)
+    date = models.DateTimeField(auto_now_add=True)
+    active_key = models.CharField(max_length=256)

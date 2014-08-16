@@ -1,184 +1,322 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="http://getbootstrap.com/favicon.ico">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="http://getbootstrap.com/favicon.ico">
+	
+<title>Phimpme Generator</title>
 
-	<title>Phimpme Generator</title>
-
-	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet"
-	      href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 	<!-- Optional theme -->
 	<link rel="stylesheet"
-	      href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script
+		<!-- Latest compiled and minified JavaScript -->
+		<script
 			src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-			        data-target=".navbar-collapse">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Phimp.me </a>
-		</div>
-
-
-		<div class="collapse navbar-collapse">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="/">GenApp</a></li>
-
-				<li>
-					<a href='/cgi-bin/orders/review'>Orders</a>
-				</li>
-
-				<li><a href="#about">About</a></li>
-				<li><a href="#contact">Contact</a></li>
-				{% if user %}
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdownd">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">Welcome {{ user }}
-								<span class="caret"></span>
-							</a>
-							<ul role="menu" class="dropdown-menu">
-								<li><a href="/cgi-bin/usermgt/changepwd/">Change Password</a></li>
-								<li><a href="/cgi-bin/usermgt/changemail/">Change Email</a></li>
-								<li class="divider"></li>
-								<li class="dropdown-header">Nav header</li>
-								<li><a href="#">Separated link</a></li>
-								<li><a href="#">One more separated link</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href='/cgi-bin/usermgt/logout/'>Log out</a>
-						</li>
-					</ul>
-				{% else %}
-					</ul>
-
-
-					<form class="navbar-form navbar-right" role="form" action='/cgi-bin/usermgt/login/' method='POST'>
-						<div class="form-group">
-							<input name="username" type="email" required="" placeholder="Email" class="form-control">
-						</div>
-						<div class="form-group">
-							<input name="userpwd" type="password" required="" placeholder="Password"
-							       class="form-control">
-						</div>
-						<button type="submit" class="btn btn-success">Sign in</button>
-						<a href="/static/registration.html" class="btn btn-primary">Sign up</a>
-						<a href="/cgi-bin/usermgt/regain/">Forget Your Password?</a>
-					</form>
-
-				{% endif %}
-
-		</div>
-
-	</div>
-</div>
-
-<br>
-<br>
-
-<div class="raw">
-	<div class="col-sm-8 blog-main">
-		<div class="page-header">
-			<h1>Generate your own photo app!</h1>
-
-			<p class="lead">Please fill in the form below to provide the configuration of your own app. Then you will
-				get a compiled APK of your own photo-sharing app.</p>
-		</div>
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
-			<form class="container" action='/cgi-bin/orders/order/' method='POST'>
-				<div class="row">
-					<div class="container">
-						<label class="col-xs-6 col-sm-4">
-							App Name:
-							<input placeholder="App Name" class="form-control" id="app_name" name="app_name" required=""
-							       type="text"
-							       value='{{ appname }}' {% if appname %} readonly="readonly" {% endif %}/>
-						</label>
-					</div>
-					<div class="container">
-						<label class="col-xs-6 col-sm-4">
-							Package Name: <input placeholder="Package Name" class="form-control" id="app_package"
-							                     required="" name="app_package"
-							                     type="text" value='{{ app_package }}'
-								{% if app_package %} readonly="readonly" {% endif %}/>
-						</label>
-					</div>
-					<div class="container">
-						<label class="col-xs-6 col-sm-4">App logo: Not supported yet</label>
-					</div>
-					<div class="container">
-						<label class="col-xs-6 col-sm-4">Functions:</label>
-					</div>
-					<div class="container">
-						<label class="col-xs-6 col-sm-4">
-							<input type="checkbox" name="enable_map" id="enable_map"/> <label
-								for="enable_map">Enable map</label>
-						</label>
-					</div>
-					<div class="container">
-						<label class="col-xs-6 col-sm-4">
-							<input type="checkbox" name="enable_photo_capturing"
-							       id="enable_photo_capturing"/> <label
-								for="enable_photo_capturing">Enable photo capturing</label>
-						</label>
-					</div>
-					<div class="container">
-						<label class="col-xs-6 col-sm-4">
-							<input type="checkbox" name="enable_choose_from_library"
-							       id="enable_choose_from_library"/> <label
-								for="enable_choose_from_library">Enable choose from
-							library</label>
-						</label>
-					</div>
-					<div class="container">
-						<label class="col-xs-6 col-sm-4">
-							<input type="checkbox" name="enable_photo_manipulation"
-							       id="enable_photo_manipulation"/> <label
-								for="enable_photo_manipulation">Enable photo manipulation</label>
-						</label>
-					</div>
-					<div class="container">
-						<label class="col-xs-6 col-sm-4">
-							<input type="checkbox" name="enable_photo_location_modification"
-							       id="enable_photo_location_modification"/> <label
-								for="enable_photo_location_modification">Enable photo
-							location modification</label>
-						</label>
-					</div>
-					<div class="container">
-						<label class="col-xs-6 col-sm-4">
-							<input type="checkbox" name="enable_nfc" id="enable_nfc"/> <label
-								for="enable_nfc">Enable NFC</label>
-						</label>
-					</div>
-					<div class="container">
-						<label class="col-xs-6 col-sm-4">
-							<input type="submit" name="submit" id="submit" value="Generate"
-							       class="btn btn-lg btn-primary btn-block"/>
-						</label>
-					</div>
-				</div>
-				<p class="text-muted">
-					By clicking "Generate", you agree to our
-					<a target="_blank" href="/static/privacy.html">privacy policy</a>. <span class="js-email-notice">We will send you account related emails occasionally.</span>
-				</p>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Phimpme </a> 
+			</div>
+
+
+       <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">GenApp</a></li>
+
+			<li>
+				<a href='/cgi-bin/orders/review'>Orders</a> 
+			</li>       
+			
+			<li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+			{% if user %}
+			</ul>
+			<ul  class="nav navbar-nav navbar-right" >
+			<li class="dropdownd">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#" >Welcome {{ user }}
+				<span class="caret"></span>
+				</a>
+				<ul role="menu" class="dropdown-menu">
+	            <li><a href="/cgi-bin/usermgt/changepwd/">Change Password</a></li>
+                <li><a href="/cgi-bin/usermgt/changemail/">Change Email</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+			<li>
+				<a href='/cgi-bin/usermgt/logout/'>Log out</a>
+			</li>
+			</ul>
+			{% else %}
+ 			</ul>
+			
+ 
+          <form class="navbar-form navbar-right" role="form"  action='/cgi-bin/usermgt/login/' method = 'POST' >
+            <div class="form-group">
+              <input  name="username"  type="email" required=""  placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input  name="userpwd"  type="password" required=""  placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+            <a  href="/static/registration.html" class="btn btn-primary" >Sign up</a>
+            <a  href="/cgi-bin/usermgt/regain/" >Forget Your Password?</a>
+          </form>
+          
+          {% endif %}
+          
+			</div>
+			
+		</div>
+	</div>
+	
+		<script language="javascript">
+			function check(){
+				
+				var checked1=$("input[id='enable_map']:checked").length;
+				var checked2=$("input[id='enable_photo_capturing']:checked").length;
+				var checked3=$("input[id='enable_choose_from_library']:checked").length;
+				var checkedL = checked1 + checked2 + checked3;
+				alert('dsfsdf');
+				if(checkedL > 0){
+					alert(checkedL);
+					document.getElementById('enable_map').setCustomValidity('')
+					document.getElementById('enable_photo_capturing').setCustomValidity('')
+					document.getElementById('enable_choose_from_library').setCustomValidity('')
+				} else {
+					alert(checkedL);
+					document.getElementById('enable_map').setCustomValidity('三选1')
+					document.getElementById('enable_photo_capturing').setCustomValidity('三选1')
+					document.getElementById('enable_choose_from_library').setCustomValidity('三选1')
+				}
+			}
+
+			function select_map(){
+				
+				var checked1=$("input[id='enable_map']:checked").length;
+				var checked2=$("input[id='enable_photo_location_modification']:checked").length;
+				
+				
+				var checkedL = checked1 + checked2;
+				if (checkedL > 0)  {
+					document.getElementById('map_select').innerHTML =' \
+					<label class="col-xs-6 col-sm-2" >\
+						<input type="radio" name="enable_google_map"\
+							id="enable_google_map" /> <label\
+							for="enable_google_map">Use google map</label>\
+					</label>\
+					<label class="col-xs-6 col-sm-6" >\
+						<input type="radio" name="enable_openstreetmap"\
+							id="enable_openstreetmap" /> <label\
+							for="enable_openstreetmap">Enable photo\
+							location modification</label>\
+					</label>\
+					';
+				} else {
+					document.getElementById('map_select').innerHTML ='';
+				}
+			}
+			
+			
+			function location_modify() {
+				var checked1=$("input[id='enable_photo_lation']:checked").length;
+				
+				if (checked1 > 0) {
+					document.getElementById('location_modify').innerHTML=' \
+						<label class="col-xs-6 col-sm-4" > \
+						<input type="checkbox" name="enable_photo_location_modification"\
+							id="enable_photo_location_modification"  onclick="select_map()"/> <label\
+							for="enable_photo_location_modification">Enable photo\
+							location modification</label>\
+					</label>\
+					';
+				} else {
+					document.getElementById('location_modify').innerHTML='';
+					
+				}
+				
+			}
+			
+			
+			function donate_url_enable() {
+				var checked1=$("input[id='enable_donate']:checked").length;
+				
+				if (checked1 > 0) {
+					document.getElementById('donate_url_div').innerHTML='\
+						<label   class="col-xs-6 col-sm-4" > \
+						Donate Url: <input placeholder="Donate Url"   class="form-control"  id="donate_url"  required=""  name="donate_url"\
+							type="text" \
+							/>\
+					</label>';
+				} else {
+					document.getElementById('donate_url_div').innerHTML='';
+					
+				}
+			}
+</script>
+
+<script language="javascript">
+		$('document').ready(
+	        function(){
+	            $('input[type="radio"][id="webpage"]').click(
+	                function(){
+	                    $('input[type="radio"][id="image"]').removeAttr('checked');
+						
+	                }
+
+	            );  
+	            $('input[type="radio"][id="image"]').click(
+		                function(){  
+		                    $('input[type="radio"][id="webpage"]').removeAttr('checked');
+		                }
+		        );  
+	        }
+	    );
+
+</script>
+
+	<br>
+	<br>
+	<div class="raw">
+	<div class="col-sm-8 blog-main">
+	<div class="page-header">
+        <h1>Generater</h1>
+        <p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information.</p>
+    </div>
+	<div class="container">
+		<form class="container" action='/cgi-bin/orders/order/' method='POST'>
+		<div class ="row">
+		 <div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					App Name: 
+				<input  placeholder="App Name"  class="form-control" id="app_name" name="app_name"  required="" type="text"
+						value='{{ appname }}' {% if appname %} readonly="readonly" {% endif %}/>
+				</label>
+		</div><div class="container">
+				<label   class="col-xs-6 col-sm-4" >
+					Package Name: <input placeholder="Package Name"   class="form-control"  id="app_package"  required=""  name="app_package"
+						type="text" value='{{ app_package }}'
+						{% if app_package %} readonly="readonly" {% endif %}/>
+				</label>
+		</div><div class="container">
+				<label   class="col-xs-6 col-sm-4" ><label> App logo: </label>
+				<input type="file" name="fileUpload" value="" required=""></label>
+		</div><div class="container">
+				<label   class="col-xs-6 col-sm-4" >Functions:</label>
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_map" id="enable_map"  onclick="select_map()"/> <label
+						for="enable_map">Enable map</label>
+				</label>
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_photo_capturing"
+						id="enable_photo_capturing" /> <label
+						for="enable_photo_capturing">Enable photo capturing</label>
+				</label>
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_choose_from_library"
+						id="enable_choose_from_library"  /> <label
+						for="enable_choose_from_library">Enable choose from
+						library</label>
+				</label>
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_photo_manipulation"
+						id="enable_photo_manipulation" /> <label
+						for="enable_photo_manipulation">Enable photo manipulation</label>
+				</label>
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_photo_location"
+						id="enable_photo_lation"  onclick="location_modify()"/> <label
+						for="enable_photo_lation">Enable photo Location</label>
+				</label>
+		</div><div class="container" id = "location_modify">
+
+		</div><div class="container" id="map_select">
+
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_nfc" id="enable_nfc" /> <label
+						for="enable_nfc">Enable NFC</label>
+				</label>
+
+
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_android_sharing" id="enable_android_sharing" /> <label
+						for="enable_android_sharing">Enable Android Sharing</label>
+				</label>	
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_donate" id="enable_donate"  onclick="donate_url_enable()"/> <label
+						for="enable_donate">Enable Donate</label>
+				</label>		
+		</div><div class="container" id = 'donate_url_div'>
+				
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_advertisment" id="enable_advertisment" /> <label
+						for="enable_advertisment">Enable Advertisment</label>
+				</label>	
+				
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="radio" name="home_show_webpage" id="webpage" /> <label
+						for="webpage">Webpage</label>
+				<label class="col-xs-6 col-sm-4" >
+					<input type="radio" name="image" id="image" /> <label
+						for="image"> Image</label>
+				</label>
+		</div><div class="container" id = "back_div">
+		
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_sharing_to_wordpress" id="enable_sharing_to_wordpress" /> <label
+						for="enable_sharing_to_wordpress">Enable Sharing to Wordpress</label>
+				</label>
+
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_sharing_to_drupal" id="enable_sharing_to_drupal" /> <label
+						for="enable_sharing_to_drupal">Enable Sharing to Drupal</label>
+				</label>
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="checkbox" name="enable_sharing_to_joomla" id="enable_sharing_to_joomla" /> <label
+						for="enable_sharing_to_joomla">Enable Sharing to Joomla</label>
+				</label>		
+				
+		</div><div class="container">
+				<label class="col-xs-6 col-sm-4" >
+					<input type="submit" onclick="check()" name="submit" id="submit" value="Generate" class ="btn btn-lg btn-primary btn-block"/>
+				</label>
+		</div>
+		</div>
+		<p class="text-muted">
+          By clicking "Generate", you agree to our
+          <a target="_blank" href="/static/privacy.html">privacy policy</a>. <span class="js-email-notice">We will send you account related emails occasionally.</span>
+        </p>
 		</div>
 		</form>
 	</div>
@@ -186,34 +324,38 @@
 	<br>
 	<br>
 
+		
 	<div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-		<div class="sidebar-module sidebar-module-inset">
-			<h4>About</h4>
-
-			<p>Phimp.me is a website where everyone could get their own photo sharing app for their website hosted with
-				WordPress, Drupal, or Joomla.</p>
-		</div>
-		<div class="sidebar-module">
-			<h4>FAQ</h4>
-			<ol class="list-unstyled">
-				<li><a href="#">What is phimp.me?</a></li>
-				<li><a href="#">How much does it cost?</a></li>
-				<li><a href="#">Is there a demo of the app?</a></li>
-				<li><a href="#">How does the website work?</a></li>
-				<li><a href="#">Any update plans?</a></li>
-				<li><a href="#">What payment gateway does it support?</a></li>
-			</ol>
-		</div>
-		<div class="sidebar-module">
-			<h4>Elsewhere</h4>
-			<ol class="list-unstyled">
-				<li><a href="#">GitHub</a></li>
-				<li><a href="#">Twitter</a></li>
-				<li><a href="#">Facebook</a></li>
-				<li><a href="#">Contact us</a></li>
-			</ol>
-		</div>
-	</div>
-</div>
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">March 2014</a></li>
+              <li><a href="#">February 2014</a></li>
+              <li><a href="#">January 2014</a></li>
+              <li><a href="#">December 2013</a></li>
+              <li><a href="#">November 2013</a></li>
+              <li><a href="#">October 2013</a></li>
+              <li><a href="#">September 2013</a></li>
+              <li><a href="#">August 2013</a></li>
+              <li><a href="#">July 2013</a></li>
+              <li><a href="#">June 2013</a></li>
+              <li><a href="#">May 2013</a></li>
+              <li><a href="#">April 2013</a></li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">GitHub</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+            </ol>
+          </div>
+        </div>
+       	</div>
 </body>
 </html>
