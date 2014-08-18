@@ -32,7 +32,7 @@ def set_package_name(path, package_name):
 				file_path = os.path.join(root, f)
 				content = open(file_path, 'r').read()
 				content = content.replace("com.phimpme.phimpme", "com.phimpme." + package_name)
-				open(f, 'w').write(content)
+				open(file_path, 'w').write(content)
 
 	# Move src folder
 	if re.match(r"^[a-z0-9]+$", package_name) is None:
