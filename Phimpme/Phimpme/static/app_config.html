@@ -89,24 +89,34 @@
 	</div>
 	
 		<script language="javascript">
+		
+			function checkfile(name) {
+				var size = document.getElementById(name).files[0].size;
+				if (size > 5000000) {
+					document.getElementById(name).setCustomValidity('文件必须小于5MB')
+				} else {
+					document.getElementById(name).setCustomValidity('')
+				}
+			}
 			function check(){
 				
 				var checked1=$("input[id='enable_map']:checked").length;
 				var checked2=$("input[id='enable_photo_capturing']:checked").length;
 				var checked3=$("input[id='enable_choose_from_library']:checked").length;
 				var checkedL = checked1 + checked2 + checked3;
-				alert('dsfsdf');
+			
+
 				if(checkedL > 0){
-					alert(checkedL);
 					document.getElementById('enable_map').setCustomValidity('')
 					document.getElementById('enable_photo_capturing').setCustomValidity('')
 					document.getElementById('enable_choose_from_library').setCustomValidity('')
 				} else {
-					alert(checkedL);
 					document.getElementById('enable_map').setCustomValidity('三选1')
 					document.getElementById('enable_photo_capturing').setCustomValidity('三选1')
 					document.getElementById('enable_choose_from_library').setCustomValidity('三选1')
 				}
+				checkfile('logo_image');
+				checkfile('background_image');
 			}
 
 			function select_map(){
@@ -120,12 +130,12 @@
 					document.getElementById('map_select').innerHTML =' \
 					<label class="col-xs-6 col-sm-2" >\
 						<input type="radio" name="enable_google_map"\
-							id="enable_google_map" /> <label\
+							id="enable_google_map" onclick="map_mutex_google()"/> <label\
 							for="enable_google_map">Use google map</label>\
 					</label>\
 					<label class="col-xs-6 col-sm-6" >\
 						<input type="radio" name="enable_openstreetmap"\
-							id="enable_openstreetmap" /> <label\
+							id="enable_openstreetmap" onclick="map_mutex_openstreet()"/> <label\
 							for="enable_openstreetmap">Enable photo\
 							location modification</label>\
 					</label>\
@@ -139,7 +149,7 @@
 			function location_modify() {
 				var checked1=$("input[id='enable_photo_lation']:checked").length;
 				
-				if (checked1 > 0) {
+				if (checked1 == 0) {
 					document.getElementById('location_modify').innerHTML=' \
 						<label class="col-xs-6 col-sm-4" > \
 						<input type="checkbox" name="enable_photo_location_modification"\
@@ -158,7 +168,7 @@
 			
 			function donate_url_enable() {
 				var checked1=$("input[id='enable_donate']:checked").length;
-				
+	 
 				if (checked1 > 0) {
 					document.getElementById('donate_url_div').innerHTML='\
 						<label   class="col-xs-6 col-sm-4" > \
@@ -168,26 +178,123 @@
 					</label>';
 				} else {
 					document.getElementById('donate_url_div').innerHTML='';
+				}
+			}
+			
+			
+			function wordpress_sharing() {
+				var checked1=$("input[id='enable_sharing_to_wordpress']:checked").length;
+			
+
+				if (checked1 > 0) {
+					document.getElementById('enable_sharing_to_wordpress_div').innerHTML='\
+						<label   class="col-xs-6 col-sm-4" > \
+						Wordpress Root Url: <input placeholder="Wordpress Root Url"   class="form-control"  id="wordpress_root_url"  required=""  name="wordpress_root_url"\
+							type="text" \
+							/>\
+					</label><label   class="col-xs-6 col-sm-4" > \
+					Wordpress Gategory: <input placeholder="Wordpress Gategory"   class="form-control"  id="wordpress_gategory"  required=""  pattern="[a-zA-Z ]+" name="wordpress_gategory"\
+					type="text" \
+					/>\
+			</label>';
+				} else {
+					document.getElementById('enable_sharing_to_wordpress_div').innerHTML='';
+				}
+			}
+			
+			function drupal_sharing() {
+				
+				var checked1=$("input[id='enable_sharing_to_drupal']:checked").length;
+				
+				if (checked1 > 0) {
+					document.getElementById('enable_sharing_to_drupal_div').innerHTML='\
+						<label   class="col-xs-6 col-sm-4" > \
+						Drupal Root Url: <input placeholder="Drupal Root Url"   class="form-control"  id="drupal_root_url"  required=""  name="drapul_root_url"\
+							type="text" \
+							/>\
+					</label><label   class="col-xs-6 col-sm-4" > \
+					Drupal Gategory: <input placeholder="Drupal Gategory"   class="form-control"  id="drupal_gategory"  required=""  pattern="[a-zA-Z]+" name="drupal_gategory"\
+					type="text" \
+					/>\
+			</label>';
+				} else {
+					document.getElementById('enable_sharing_to_drupal_div').innerHTML='';
 					
 				}
+			}
+			
+			
+			function joomla_sharing() {
+				var checked1=$("input[id='enable_sharing_to_joomla']:checked").length;
+				if (checked1 > 0) {
+					document.getElementById('enable_sharing_to_joomla_div').innerHTML='\
+						<label   class="col-xs-6 col-sm-4" > \
+						Drupal Root Url: <input placeholder="Joomla Root Url"   class="form-control"  id="joomlal_root_url"  required=""  name="joomla_root_url"\
+							type="text" \
+							/>\
+							</label><label   class="col-xs-6 col-sm-4" > \
+							Joomla DIR: <input placeholder="Joomla Dir"   class="form-control"  id="joomla_dir"  required=""  pattern="[0-9]+" name="joomla_dir"\
+							type="text" \
+							/> \
+					</label><label   class="col-xs-6 col-sm-4" > \
+					Joomla Gategory: <input placeholder="Joomla Gategory"   class="form-control"  id="joomla_gategory"  required=""  pattern="[a-zA-Z]+" name="joomla_gategory"\
+					type="text" \
+					/>\
+			</label>';
+				} else {
+					document.getElementById('enable_sharing_to_joomla_div').innerHTML='';
+					
+				}
+			}
+			
+			
+			function map_mutex_google() {
+				$('input[type="radio"][id="enable_openstreetmap"]').removeAttr('checked');
+			}
+			
+			
+			function map_mutex_openstreet() {
+				$('input[type="radio"][id="enable_google_map"]').removeAttr('checked');
 			}
 </script>
 
 <script language="javascript">
 		$('document').ready(
 	        function(){
+	      
 	            $('input[type="radio"][id="webpage"]').click(
 	                function(){
 	                    $('input[type="radio"][id="image"]').removeAttr('checked');
-						
+	                	$('#back_div').html('<label   class="col-xs-6 col-sm-4" > \
+							Home Url: <input placeholder="Home Url"   class="form-control"  id="home_url"  required=""  name="home_url"\
+								type="text" \
+								/></label>');						
 	                }
 
 	            );  
+	         
+
 	            $('input[type="radio"][id="image"]').click(
 		                function(){  
 		                    $('input[type="radio"][id="webpage"]').removeAttr('checked');
+		                	$('#back_div').html ('\
+		        				<label   class="col-xs-6 col-sm-4" ><label> Background image: </label> \
+		        				<input type="file"  id="background_image" name="background_image" value="" required=""></label>\
+		                			');
 		                }
+		                
 		        );  
+	            
+
+	            location_modify();
+	            select_map();
+	            donate_url_enable();
+	            wordpress_sharing();
+	            drupal_sharing();
+	            joomla_sharing();
+	            map_mutex_google();
+	            map_mutex_openstreet();
+	            
 	        }
 	    );
 
@@ -202,7 +309,7 @@
         <p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information.</p>
     </div>
 	<div class="container">
-		<form class="container" action='/cgi-bin/orders/order/' method='POST'>
+		<form class="container" action='/cgi-bin/orders/order/' method='POST'  enctype="multipart/form-data">
 		<div class ="row">
 		 <div class="container">
 				<label class="col-xs-6 col-sm-4" >
@@ -212,13 +319,13 @@
 				</label>
 		</div><div class="container">
 				<label   class="col-xs-6 col-sm-4" >
-					Package Name: <input placeholder="Package Name"   class="form-control"  id="app_package"  required=""  name="app_package"
+					Package Name: <input placeholder="Package Name(lower case alphabates only)"   class="form-control"  id="app_package"  required=""  pattern="^[a-z]{1,32}$"  name="app_package"
 						type="text" value='{{ app_package }}'
 						{% if app_package %} readonly="readonly" {% endif %}/>
 				</label>
 		</div><div class="container">
 				<label   class="col-xs-6 col-sm-4" ><label> App logo: </label>
-				<input type="file" name="fileUpload" value="" required=""></label>
+				<input type="file"  id="logo_image" name="logo_image" value="" required=""></label>
 		</div><div class="container">
 				<label   class="col-xs-6 col-sm-4" >Functions:</label>
 		</div><div class="container">
@@ -281,9 +388,10 @@
 				</label>	
 				
 		</div><div class="container">
-				<label class="col-xs-6 col-sm-4" >
+				<label class="col-xs-6 col-sm-2" >
 					<input type="radio" name="home_show_webpage" id="webpage" /> <label
 						for="webpage">Webpage</label>
+				</label>
 				<label class="col-xs-6 col-sm-4" >
 					<input type="radio" name="image" id="image" /> <label
 						for="image"> Image</label>
@@ -292,21 +400,24 @@
 		
 		</div><div class="container">
 				<label class="col-xs-6 col-sm-4" >
-					<input type="checkbox" name="enable_sharing_to_wordpress" id="enable_sharing_to_wordpress" /> <label
-						for="enable_sharing_to_wordpress">Enable Sharing to Wordpress</label>
+					<input type="checkbox" name="enable_sharing_to_wordpress" id="enable_sharing_to_wordpress" onclick="wordpress_sharing()"/> <label
+						for="enable_sharing_to_wordpress" >Enable Sharing to Wordpress</label>
 				</label>
-
+		</div><div class="container" id="enable_sharing_to_wordpress_div">
+		
 		</div><div class="container">
 				<label class="col-xs-6 col-sm-4" >
-					<input type="checkbox" name="enable_sharing_to_drupal" id="enable_sharing_to_drupal" /> <label
-						for="enable_sharing_to_drupal">Enable Sharing to Drupal</label>
+					<input type="checkbox" name="enable_sharing_to_drupal" id="enable_sharing_to_drupal" onclick="drupal_sharing()"/> <label
+						for="enable_sharing_to_drupal" >Enable Sharing to Drupal</label>
 				</label>
+		</div><div class="container" id = "enable_sharing_to_drupal_div">	
+		
 		</div><div class="container">
 				<label class="col-xs-6 col-sm-4" >
-					<input type="checkbox" name="enable_sharing_to_joomla" id="enable_sharing_to_joomla" /> <label
-						for="enable_sharing_to_joomla">Enable Sharing to Joomla</label>
+					<input type="checkbox" name="enable_sharing_to_joomla" id="enable_sharing_to_joomla" onclick="joomla_sharing()"/> <label
+						for="enable_sharing_to_joomla" >Enable Sharing to Joomla</label>
 				</label>		
-				
+		</div><div class="container" id = "enable_sharing_to_joomla_div">	
 		</div><div class="container">
 				<label class="col-xs-6 col-sm-4" >
 					<input type="submit" onclick="check()" name="submit" id="submit" value="Generate" class ="btn btn-lg btn-primary btn-block"/>

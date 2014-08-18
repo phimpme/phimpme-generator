@@ -10,7 +10,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
+from django.conf.global_settings import EMAIL_PORT, EMAIL_HOST_USER, \
+    EMAIL_HOST_PASSWORD, EMAIL_USE_TLS
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -109,7 +110,7 @@ FILE_CHARSET = 'utf-8'
 # Email address that error messages come from.
 SERVER_EMAIL = 'root@localhost'
 
-# ###########
+############
 # SESSIONS #
 ############
 SESSION_COOKIE_NAME = 'sessionid'  # Cookie name. This can be whatever you want.
@@ -135,7 +136,7 @@ LOGOUT_URL = '/static/login.html'
 LOGIN_REDIRECT_URL = LOGIN_URL
 
 # APP OUT PUT PATH
-OUTPUT_PATH = STATIC_DIR1 + 'generated_apk' + '%Y/%m/%d/'
+OUTPUT_PATH = STATIC_DIR1 + 'output_path'
 
 
 

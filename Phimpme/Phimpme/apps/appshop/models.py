@@ -3,12 +3,11 @@
 
 import thread
 import os
-
+import time
 from django.db import models
-from django.contrib.auth.decorators import login_required
-
 from Phimpme.apps.orders.models import order
-
+from django.core.context_processors import request
+from django.contrib.auth.decorators import login_required, permission_required
 # Create your models here.
 
 class appshop_paramters(models.Model):

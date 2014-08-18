@@ -68,7 +68,7 @@ def orders_review(request):
 
 
 
-def orders_process(user, app_name, app_package, enables):
+def orders_process(user, app_name, app_package, enables, logo, background):
     oa = None
     order_values = int(appshop_get_value('first_build_price'))
     delta = int(appshop_get_value('order_expiry'))
@@ -95,6 +95,16 @@ def orders_process(user, app_name, app_package, enables):
             order_fetures=str(enables), order_values=order_values, \
             order_package=app_package, order_is_rebuild=True, \
             order_due_time=due_time)
+    if logo is not None:
+        if oa.order_logo is not None:
+            print 'save logo'
+            oa.order_logo.delete()
+            oa.order_logo.save(str(user.id) + str(app_name) + str(app_package), content=logo, save=True)
+    if background is not None:
+        if oa.order_background is not None:
+            print 'save bb'
+            oa.order_background.delete()
+            oa.order_background.save(str(user.id) + str(app_name) + str(app_package), content=background, save=True)
     oa.save()
 
 @login_required
@@ -113,16 +123,32 @@ def orders_ordering(request):
             user = request.user
             app_name = request.POST['app_name']
             app_package = request.POST['app_package']
-            enables = []
+            enables = {}
             for (k, v) in request.POST.items():
                 if k.find('enable_') != -1:
-                    enables.append(k.upper())
-            orders_process(user, app_name, app_package, enables)
+                    enables[k.upper()] = True
+                if k.find('home_show_webpage') != -1:
+                    enables[k.upper()] = True;
+                if k.find('drupal_') != -1:
+                    enables[k.upper()] = v;
+                if k.find('worpress_') != -1:
+                    enables[k.upper()] = v;
+                if k.find('joomla_') != -1:
+                    enables[k.upper()] = v;
+                logo = request.FILES.get('logo_image', default=None)
+                background_image = request.FILES.get('background_image', default=None)
+                if logo is not None:
+                    print 'log exist'
+                    enables[logo] = '%s' % logo
+                if background_image is not None:
+                    print 'background exist'
+                    enables[background_image] = '%s' % background_image
+                orders_process(user, app_name, app_package, enables , logo, background_image)
             return render(request, 'success.html', {'msg': 'waiting payment', 'url':'cgi-bin/orders/review/'})
         else:
             raise Exception('method is not POST ')
     except Exception, e:
-       return render_to_response('error.html', {'msg':'%s' % e, 'url':'/'})
+       return render_to_response('error.html', {'msg':'%s' % e})
 
 
 

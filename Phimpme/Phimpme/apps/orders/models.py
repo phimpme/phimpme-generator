@@ -20,6 +20,8 @@ class order(models.Model):
     order_is_rebuild = models.BooleanField(default=False)
     order_payment_id = models.CharField(max_length=256)
     order_payer_id = models.CharField(max_length=256)
+    order_logo = models.FileField(upload_to=OUTPUT_PATH);
+    order_background = models.FileField(upload_to=OUTPUT_PATH);
 
 
 
