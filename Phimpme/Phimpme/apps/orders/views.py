@@ -88,14 +88,13 @@ def orders_process(user, app_name, app_package, enables, logo, background):
 		oa = order(
 			order_related_user=user, order_status=0,
 			order_appname=app_name,
-			order_fetures=str(enables), order_values=order_values,
+			order_features=str(enables), order_values=order_values,
 			order_package=app_package, order_is_rebuild=True,
 			order_due_time=due_time)
 	if logo is not None:
 		if oa.order_logo is not None:
 			print 'save logo'
 			oa.order_logo.delete()
-			# TODO: Fix permission problem here
 			oa.order_logo.save(str(user.id) + str(app_name) + str(app_package), content=logo, save=True)
 	if background is not None:
 		if oa.order_background is not None:
@@ -136,10 +135,10 @@ def orders_ordering(request):
 				logo = request.FILES.get('logo_image', default=None)
 				background_image = request.FILES.get('background_image', default=None)
 				if logo is not None:
-					print 'log exist'
+					print 'logo exists'
 					enables[logo] = '%s' % logo
 				if background_image is not None:
-					print 'background exist'
+					print 'background exists'
 					enables[background_image] = '%s' % background_image
 				orders_process(user, app_name, app_package, enables, logo, background_image)
 			return render(request, 'success.html', {'msg': 'waiting payment', 'url': 'cgi-bin/orders/review/'})

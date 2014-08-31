@@ -1,31 +1,22 @@
 #!/usr/bin/env python
 # coding:utf-8
 import thread
-from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render_to_response, render
-from django.http.response import HttpResponseRedirect
-from django.http.response import HttpResponse
-from django.http import Http404
-from django import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required, permission_required
-from Phimpme.apps.orders.views import orders_process
-from Phimpme.apps.usermgt.models import passwd_regain
-
-
-from Phimpme.settings import EMAIL_HOST_USER, DOMAIN_NAME
-from django.core.mail import send_mail
 import random
 import datetime
-import time, string
-'''
-Created on 2014年6月28日
+import time
 
-@author: tony
-'''
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render_to_response, render
+from django.http.response import HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from Phimpme.apps.orders.views import orders_ordering
+from Phimpme.apps.usermgt.models import passwd_regain
+from Phimpme.settings import EMAIL_HOST_USER, DOMAIN_NAME
+
 
 # Create your views here.
-
 
 def usermgt_check_timeout():
     """
@@ -60,7 +51,8 @@ def usermgt_login(request):
              raise Exception('username:[%s] login fail,authenticate failed' % (username))
         if user is not None and user.is_active:
             if request.session.get('app_name', default=None) is not None :
-                orders_process(request.user, request.session['app_name'], request.session['app_package'], request.session['enables'])
+                #orders_process(request.user, request.session['app_name'], request.session['app_package'], request.session['enables'])
+                orders_ordering(request)
                 request.session['app_name'] = None
                 return render(request, 'success.html', {'msg': 'now will continue your order...', 'url':'cgi-bin/orders/review/'})
             return render(request, 'app_config.html', {'user': '%s' % request.user})

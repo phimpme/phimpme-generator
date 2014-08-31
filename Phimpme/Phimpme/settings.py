@@ -126,9 +126,7 @@ MEDIA_URL = '/media/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATIC_DIR1 = BASE_DIR + '/Phimpme/static/'
-STATICFILES_DIRS = (
-	STATIC_DIR1,
-)
+STATICFILES_DIRS = (STATIC_DIR1,)
 STATIC_URL = '/static/'
 
 LOGIN_URL = '/static/login.html'
@@ -136,9 +134,7 @@ LOGOUT_URL = '/static/login.html'
 LOGIN_REDIRECT_URL = LOGIN_URL
 
 # APP OUT PUT PATH
-OUTPUT_PATH = os.path.join(STATIC_DIR1, 'output_path')
-
-
+OUTPUT_PATH = 'output_path'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

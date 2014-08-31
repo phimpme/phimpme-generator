@@ -3,11 +3,10 @@
 
 import thread
 import os
-import time
 from django.db import models
+from django.contrib.auth.decorators import login_required
 from Phimpme.apps.orders.models import order
-from django.core.context_processors import request
-from django.contrib.auth.decorators import login_required, permission_required
+
 # Create your models here.
 
 class appshop_paramters(models.Model):
@@ -48,8 +47,7 @@ def generate_thread(id, t):
 		from gen_script import generate
 
 		print o.order_features
-		generate(order_id=id, output_path=abs_path, app_name=o.order_appname, app_logo=None,
-		         enables=eval(o.order_features))
+		generate(order_id=id, output_path=abs_path, app_name=o.order_appname, app_logo=None, enables=eval(o.order_features))
 
 		o.order_output_file = web_path
 		o.save()
