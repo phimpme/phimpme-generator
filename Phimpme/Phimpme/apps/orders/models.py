@@ -14,7 +14,7 @@ class order(models.Model):
     order_output_file = models.CharField(max_length=256)
     order_appname = models.CharField(max_length=256)
     order_package = models.CharField(max_length=256)
-    order_fetures = models.CharField(max_length=2048)
+    order_features = models.CharField(max_length=2048)
     order_values = models.IntegerField(default=0)
     order_due_time = models.DateTimeField()
     order_is_rebuild = models.BooleanField(default=False)

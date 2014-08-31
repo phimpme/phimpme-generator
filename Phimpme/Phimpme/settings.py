@@ -136,7 +136,7 @@ LOGOUT_URL = '/static/login.html'
 LOGIN_REDIRECT_URL = LOGIN_URL
 
 # APP OUT PUT PATH
-OUTPUT_PATH = STATIC_DIR1 + 'output_path'
+OUTPUT_PATH = os.path.join(STATIC_DIR1, 'output_path')
 
 
 

@@ -9,7 +9,7 @@ from Phimpme.apps.orders.models import order
 class orderAdmin(admin.ModelAdmin):
     """
     """
-    list_display = ('id', 'order_related_user', 'order_values', 'order_appname', 'order_created_time', 'order_fetures')
+    list_display = ('id', 'order_related_user', 'order_values', 'order_appname', 'order_created_time', 'order_features')
 
 
 # add order model to adminsystem

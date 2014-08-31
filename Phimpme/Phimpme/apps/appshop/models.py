@@ -47,8 +47,9 @@ def generate_thread(id, t):
 		abs_path = os.path.abspath('Phimpme' + web_path)
 		from gen_script import generate
 
+		print o.order_features
 		generate(order_id=id, output_path=abs_path, app_name=o.order_appname, app_logo=None,
-		         enables=eval(o.order_fetures))
+		         enables=eval(o.order_features))
 
 		o.order_output_file = web_path
 		o.save()
